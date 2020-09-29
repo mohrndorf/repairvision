@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.sidiff.feature.revision_1.2.0.qualifier.jar" id="org.sidiff.feature.revision" version="1.2.0.qualifier">
+      <category name="Re(pair)Vision (All-In-One)"/>
+   </feature>
+   <feature url="features/org.sdiff.feature.revision.domains.ecore_1.2.0.qualifier.jar" id="org.sdiff.feature.revision.domains.ecore" version="1.2.0.qualifier">
+      <category name="Re(pair)Vision Domains - Ecore (Configuration)"/>
+   </feature>
+   <feature url="features/org.sdiff.feature.revision.domains.uml_1.2.0.qualifier.jar" id="org.sdiff.feature.revision.domains.uml" version="1.2.0.qualifier">
+      <category name="Re(pair)Vision Domains - UML (Configuration)"/>
+   </feature>
+   <feature id="org.sidiff.feature.matcher.id.xmiid">
+      <category name="SiDiff Matchers (Optional)"/>
+   </feature>
+   <feature id="org.sidiff.feature.matcher.signature.name">
+      <category name="SiDiff Matchers (Optional)"/>
+   </feature>
+   <feature id="org.sidiff.feature.matcher.signature.uri">
+      <category name="SiDiff Matchers (Optional)"/>
+   </feature>
+   <feature id="org.sidiff.feature.revision.matchers.adapter.sidiff">
+      <category name="SiDiff Matchers (Optional)"/>
+   </feature>
+   <category-def name="Re(pair)Vision (All-In-One)" label="Re(pair)Vision (All-In-One)">
+      <description>
+         All core plug-ins of ReVision: A tool for history-based model repair recommendations
+      </description>
+   </category-def>
+   <category-def name="Re(pair)Vision Domains - Ecore (Configuration)" label="Re(pair)Vision Domains - Ecore (Configuration)">
+      <description>
+         Domain-specific features which enable repair support for Ecore.
+      </description>
+   </category-def>
+   <category-def name="Re(pair)Vision Domains - UML (Configuration)" label="Re(pair)Vision Domain - UML (Configuration)">
+      <description>
+         Domain-specific features which enable repair support for UML.
+      </description>
+   </category-def>
+   <category-def name="SiDiff Matchers (Optional)" label="SiDiff Matchers (Optional)">
+      <description>
+         An adapter to plug-in SiDiff matchers into ReVision
+      </description>
+   </category-def>
+   <repository-reference location="http://download.eclipse.org/modeling/gmp/gmf-tooling/updates/releases-3.2.1/" enabled="true" />
+   <repository-reference location="http://download.eclipse.org/technology/m2e/releases" enabled="true" />
+   <repository-reference location="http://dl.bintray.com/subclipse/releases/subclipse/latest/" enabled="true" />
+   <repository-reference location="http://download.eclipse.org/modeling/mdt/ocl/updates/releases/latest" enabled="true" />
+   <repository-reference location="http://download.eclipse.org/modeling/mdt/papyrus/updates/releases/2020-03" enabled="true" />
+</site>

@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="ASCII"?>
-<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_DM1VUGXaEemxua17r6Vydg" name="Delete: Named Subpackage" description="Delete: Named Subpackage">
-  <units xsi:type="henshin:SequentialUnit" xmi:id="_DM18YGXaEemxua17r6Vydg" name="mainUnit" subUnits="_DM18Z2XaEemxua17r6Vydg">
-    <parameters xmi:id="_DM18YWXaEemxua17r6Vydg" name="containerPackage" kind="IN"/>
-    <parameters xmi:id="_DM18YmXaEemxua17r6Vydg" name="subPackage" kind="IN"/>
-    <parameters xmi:id="_DM18Y2XaEemxua17r6Vydg" name="className" kind="IN"/>
-    <parameterMappings xmi:id="_DM18ZGXaEemxua17r6Vydg" source="_DM18YWXaEemxua17r6Vydg" target="_DM18aGXaEemxua17r6Vydg"/>
-    <parameterMappings xmi:id="_DM18ZWXaEemxua17r6Vydg" source="_DM18YmXaEemxua17r6Vydg" target="_DM18aWXaEemxua17r6Vydg"/>
-    <parameterMappings xmi:id="_DM18ZmXaEemxua17r6Vydg" source="_DM18Y2XaEemxua17r6Vydg" target="_DM18amXaEemxua17r6Vydg"/>
+<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_oatPwG67EeqnUr4w5kV3sA" name="Delete: Named Subpackage" description="Delete: Named Subpackage">
+  <units xsi:type="henshin:SequentialUnit" xmi:id="_oatPwW67EeqnUr4w5kV3sA" name="mainUnit" subUnits="_oatPyG67EeqnUr4w5kV3sA">
+    <parameters xmi:id="_oatPwm67EeqnUr4w5kV3sA" name="fromContainerPackage" kind="IN"/>
+    <parameters xmi:id="_oatPw267EeqnUr4w5kV3sA" name="oldSubPackage" kind="IN"/>
+    <parameters xmi:id="_oatPxG67EeqnUr4w5kV3sA" name="className" kind="IN"/>
+    <parameterMappings xmi:id="_oatPxW67EeqnUr4w5kV3sA" source="_oatPwm67EeqnUr4w5kV3sA" target="_oatPyW67EeqnUr4w5kV3sA"/>
+    <parameterMappings xmi:id="_oatPxm67EeqnUr4w5kV3sA" source="_oatPw267EeqnUr4w5kV3sA" target="_oatPym67EeqnUr4w5kV3sA"/>
+    <parameterMappings xmi:id="_oatPx267EeqnUr4w5kV3sA" source="_oatPxG67EeqnUr4w5kV3sA" target="_oatPy267EeqnUr4w5kV3sA"/>
   </units>
-  <units xsi:type="henshin:Rule" xmi:id="_DM18Z2XaEemxua17r6Vydg" name="Delete: Named Subpackage">
-    <parameters xmi:id="_DM18aGXaEemxua17r6Vydg" name="containerPackage" kind="IN"/>
-    <parameters xmi:id="_DM18aWXaEemxua17r6Vydg" name="subPackage" kind="IN"/>
-    <parameters xmi:id="_DM18amXaEemxua17r6Vydg" name="className" kind="IN"/>
-    <lhs xmi:id="_DM18a2XaEemxua17r6Vydg" name="Lhs">
-      <nodes xmi:id="_DM18bGXaEemxua17r6Vydg" name="containerPackage" incoming="_DM18cGXaEemxua17r6Vydg" outgoing="_DM18b2XaEemxua17r6Vydg">
+  <units xsi:type="henshin:Rule" xmi:id="_oatPyG67EeqnUr4w5kV3sA" name="Delete: Named Subpackage">
+    <parameters xmi:id="_oatPyW67EeqnUr4w5kV3sA" name="fromContainerPackage" kind="IN"/>
+    <parameters xmi:id="_oatPym67EeqnUr4w5kV3sA" name="oldSubPackage" kind="IN"/>
+    <parameters xmi:id="_oatPy267EeqnUr4w5kV3sA" name="className" kind="IN"/>
+    <lhs xmi:id="_oatPzG67EeqnUr4w5kV3sA" name="Lhs">
+      <nodes xmi:id="_oatPzW67EeqnUr4w5kV3sA" name="fromContainerPackage" incoming="_oatP0W67EeqnUr4w5kV3sA" outgoing="_oatP0G67EeqnUr4w5kV3sA">
         <type href="http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
       </nodes>
-      <nodes xmi:id="_DM18bWXaEemxua17r6Vydg" name="subPackage" incoming="_DM18b2XaEemxua17r6Vydg" outgoing="_DM18cGXaEemxua17r6Vydg">
+      <nodes xmi:id="_oatPzm67EeqnUr4w5kV3sA" name="oldSubPackage" incoming="_oatP0G67EeqnUr4w5kV3sA" outgoing="_oatP0W67EeqnUr4w5kV3sA">
         <type href="http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
-        <attributes xmi:id="_DM18bmXaEemxua17r6Vydg" value="className">
+        <attributes xmi:id="_oatPz267EeqnUr4w5kV3sA" value="className">
           <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
         </attributes>
       </nodes>
-      <edges xmi:id="_DM18b2XaEemxua17r6Vydg" source="_DM18bGXaEemxua17r6Vydg" target="_DM18bWXaEemxua17r6Vydg">
+      <edges xmi:id="_oatP0G67EeqnUr4w5kV3sA" source="_oatPzW67EeqnUr4w5kV3sA" target="_oatPzm67EeqnUr4w5kV3sA">
         <type href="http://www.eclipse.org/emf/2002/Ecore#//EPackage/eSubpackages"/>
       </edges>
-      <edges xmi:id="_DM18cGXaEemxua17r6Vydg" source="_DM18bWXaEemxua17r6Vydg" target="_DM18bGXaEemxua17r6Vydg">
+      <edges xmi:id="_oatP0W67EeqnUr4w5kV3sA" source="_oatPzm67EeqnUr4w5kV3sA" target="_oatPzW67EeqnUr4w5kV3sA">
         <type href="http://www.eclipse.org/emf/2002/Ecore#//EPackage/eSuperPackage"/>
       </edges>
     </lhs>
-    <rhs xmi:id="_DM18cWXaEemxua17r6Vydg" name="Rhs">
-      <nodes xmi:id="_DM18cmXaEemxua17r6Vydg" name="containerPackage">
+    <rhs xmi:id="_oatP0m67EeqnUr4w5kV3sA" name="Rhs">
+      <nodes xmi:id="_oatP0267EeqnUr4w5kV3sA" name="fromContainerPackage">
         <type href="http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
       </nodes>
     </rhs>
-    <mappings xmi:id="_DM18c2XaEemxua17r6Vydg" origin="_DM18bGXaEemxua17r6Vydg" image="_DM18cmXaEemxua17r6Vydg"/>
+    <mappings xmi:id="_oatP1G67EeqnUr4w5kV3sA" origin="_oatPzW67EeqnUr4w5kV3sA" image="_oatP0267EeqnUr4w5kV3sA"/>
   </units>
 </henshin:Module>

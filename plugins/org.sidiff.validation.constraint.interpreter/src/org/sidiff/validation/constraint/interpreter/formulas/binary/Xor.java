@@ -1,9 +1,10 @@
 package org.sidiff.validation.constraint.interpreter.formulas.binary;
 
-import org.sidiff.validation.constraint.interpreter.decisiontree.Alternative;
-import org.sidiff.validation.constraint.interpreter.decisiontree.IDecisionBranch;
-import org.sidiff.validation.constraint.interpreter.decisiontree.Sequence;
-import org.sidiff.validation.constraint.interpreter.scope.IScopeRecorder;
+import org.sidiff.revision.impact.changetree.Alternative;
+import org.sidiff.revision.impact.changetree.IDecisionBranch;
+import org.sidiff.revision.impact.changetree.Sequence;
+import org.sidiff.revision.impact.changetree.scope.IScopeRecorder;
+import org.sidiff.validation.constraint.interpreter.formulas.Formula;
 
 public class Xor extends BinaryFormula {
 
@@ -29,6 +30,41 @@ public class Xor extends BinaryFormula {
 		}
 		
 		return result;
+	}
+	
+	@Override
+	public void analyze(IDecisionBranch parent, boolean expected) {
+		
+		if (expected) {
+			
+			// t f / f t
+			Alternative alternative = Alternative.nextAlternative(parent);
+			
+			// t f
+			Sequence sequenceTrueFalse = Sequence.nextSequence(alternative);
+			left.analyze(sequenceTrueFalse, true);
+			right.analyze(sequenceTrueFalse, false);
+			
+			// f t
+			Sequence sequenceFalseTrue = Sequence.nextSequence(alternative);
+			left.analyze(sequenceFalseTrue, false);
+			right.analyze(sequenceFalseTrue, true);
+			
+		} else {
+			
+			// t t / f f
+			Alternative alternative = Alternative.nextAlternative(parent);
+			
+			// t t
+			Sequence sequenceTrueTrue = Sequence.nextSequence(alternative);
+			left.analyze(sequenceTrueTrue, true);
+			right.analyze(sequenceTrueTrue, true);
+			
+			// f f
+			Sequence sequenceFalseFalse = Sequence.nextSequence(alternative);
+			left.analyze(sequenceFalseFalse, false);
+			right.analyze(sequenceFalseFalse, false);
+		}
 	}
 	
 	@Override

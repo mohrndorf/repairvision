@@ -13,10 +13,9 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
-import org.sidiff.common.emf.modelstorage.EMFStorage;
-import org.sidiff.common.ui.util.UIUtil;
-import org.sidiff.consistency.common.ui.util.WorkbenchUtil;
-import org.sidiff.integration.editor.highlighting.EditorHighlighting;
+import org.sidiff.revision.common.emf.EMFStorage;
+import org.sidiff.revision.common.ui.workbench.WorkbenchUtil;
+import org.sidiff.revision.ui.editors.highlighting.EditorHighlighting;
 
 public class FindModelElementByURIHandler extends AbstractHandler {
 
@@ -51,7 +50,7 @@ public class FindModelElementByURIHandler extends AbstractHandler {
 									platformModelElementURI.trimFragment().toString(), false)
 									.appendFragment(platformModelElementURI.fragment()).toString();
 							
-							if (WorkbenchUtil.showQuestion("Convert to: " + platformModelElementURIString + "?")) {
+							if (WorkbenchUtil.askQuestion("Convert to: " + platformModelElementURIString + "?")) {
 								modelElementURIString = platformModelElementURIString;
 							}
 						}
@@ -64,7 +63,7 @@ public class FindModelElementByURIHandler extends AbstractHandler {
 					URI resourceURI = modelElementURI.trimFragment();
 					
 					// Show the editor:
-					UIUtil.openEditor(EMFStorage.uriToPath(resourceURI));
+					WorkbenchUtil.openEditor(EMFStorage.uriToPath(resourceURI));
 					
 					// Highlight the model element:
 					EObject modelElement = resourceSet.getEObject(modelElementURI, true);

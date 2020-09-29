@@ -28,6 +28,7 @@ import org.sidiff.graphpattern.GraphElement;
 import org.sidiff.graphpattern.GraphpatternPackage;
 import org.sidiff.graphpattern.Matching;
 import org.sidiff.graphpattern.NodePattern;
+import org.sidiff.graphpattern.Stereotype;
 
 /**
  * <!-- begin-user-doc -->
@@ -147,6 +148,7 @@ public class NodePatternImpl extends GraphElementImpl implements NodePattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<EdgePattern> getOutgoings() {
 		if (outgoings == null) {
 			outgoings = new EObjectContainmentWithInverseEList<EdgePattern>(EdgePattern.class, this, GraphpatternPackage.NODE_PATTERN__OUTGOINGS, GraphpatternPackage.EDGE_PATTERN__SOURCE);
@@ -168,6 +170,38 @@ public class NodePatternImpl extends GraphElementImpl implements NodePattern {
 		return null;
 	}
 	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public EdgePattern getOutgoing(EReference type, NodePattern target, Stereotype stereotype) {
+		for (EdgePattern edge : getOutgoings()) {
+			if ((type == edge.getType()) && (edge.getTarget() == target)) {
+				if (edge.getStereotypes().contains(stereotype)) {
+					return edge;
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public EdgePattern getOutgoing(EReference type, NodePattern target) {
+		for (EdgePattern edge : getOutgoings()) {
+			if ((type == edge.getType()) && (edge.getTarget() == target)) {
+				return edge;
+			}
+		}
+		return null;
+	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -333,6 +367,7 @@ public class NodePatternImpl extends GraphElementImpl implements NodePattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject)type;
@@ -359,6 +394,7 @@ public class NodePatternImpl extends GraphElementImpl implements NodePattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(EClass newType) {
 		EClass oldType = type;
 		type = newType;
@@ -371,6 +407,7 @@ public class NodePatternImpl extends GraphElementImpl implements NodePattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<AttributePattern> getAttributes() {
 		if (attributes == null) {
 			attributes = new EObjectContainmentWithInverseEList<AttributePattern>(AttributePattern.class, this, GraphpatternPackage.NODE_PATTERN__ATTRIBUTES, GraphpatternPackage.ATTRIBUTE_PATTERN__NODE);
@@ -383,6 +420,7 @@ public class NodePatternImpl extends GraphElementImpl implements NodePattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Matching getMatching() {
 		return matching;
 	}
@@ -407,6 +445,7 @@ public class NodePatternImpl extends GraphElementImpl implements NodePattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMatching(Matching newMatching) {
 		if (newMatching != matching) {
 			NotificationChain msgs = null;
@@ -426,6 +465,7 @@ public class NodePatternImpl extends GraphElementImpl implements NodePattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<EdgePattern> getIncomings() {
 		if (incomings == null) {
 			incomings = new EObjectWithInverseResolvingEList<EdgePattern>(EdgePattern.class, this, GraphpatternPackage.NODE_PATTERN__INCOMINGS, GraphpatternPackage.EDGE_PATTERN__TARGET);
@@ -438,6 +478,7 @@ public class NodePatternImpl extends GraphElementImpl implements NodePattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Association> getAssociations() {
 		if (associations == null) {
 			associations = new EObjectContainmentWithInverseEList<Association>(Association.class, this, GraphpatternPackage.NODE_PATTERN__ASSOCIATIONS, GraphpatternPackage.ASSOCIATION__SOURCE);
@@ -632,10 +673,14 @@ public class NodePatternImpl extends GraphElementImpl implements NodePattern {
 		switch (operationID) {
 			case GraphpatternPackage.NODE_PATTERN___GET_ATTRIBUTE__EATTRIBUTE:
 				return getAttribute((EAttribute)arguments.get(0));
-			case GraphpatternPackage.NODE_PATTERN___GET_OUTGOING__EREFERENCE:
-				return getOutgoing((EReference)arguments.get(0));
 			case GraphpatternPackage.NODE_PATTERN___GET_OUTGOINGS__EREFERENCE:
 				return getOutgoings((EReference)arguments.get(0));
+			case GraphpatternPackage.NODE_PATTERN___GET_OUTGOING__EREFERENCE:
+				return getOutgoing((EReference)arguments.get(0));
+			case GraphpatternPackage.NODE_PATTERN___GET_OUTGOING__EREFERENCE_NODEPATTERN:
+				return getOutgoing((EReference)arguments.get(0), (NodePattern)arguments.get(1));
+			case GraphpatternPackage.NODE_PATTERN___GET_OUTGOING__EREFERENCE_NODEPATTERN_STEREOTYPE:
+				return getOutgoing((EReference)arguments.get(0), (NodePattern)arguments.get(1), (Stereotype)arguments.get(2));
 			case GraphpatternPackage.NODE_PATTERN___GET_INCOMING__EREFERENCE:
 				return getIncoming((EReference)arguments.get(0));
 			case GraphpatternPackage.NODE_PATTERN___GET_INCOMINGS__EREFERENCE:

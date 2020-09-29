@@ -250,7 +250,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link GraphpatternPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -264,7 +264,8 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 		if (isInited) return (GraphpatternPackage)EPackage.Registry.INSTANCE.getEPackage(GraphpatternPackage.eNS_URI);
 
 		// Obtain or create and register package
-		GraphpatternPackageImpl theGraphpatternPackage = (GraphpatternPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof GraphpatternPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new GraphpatternPackageImpl());
+		Object registeredGraphpatternPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		GraphpatternPackageImpl theGraphpatternPackage = registeredGraphpatternPackage instanceof GraphpatternPackageImpl ? (GraphpatternPackageImpl)registeredGraphpatternPackage : new GraphpatternPackageImpl();
 
 		isInited = true;
 
@@ -276,8 +277,9 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 
 		// Register package validator
 		EValidator.Registry.INSTANCE.put
-			(theGraphpatternPackage, 
+			(theGraphpatternPackage,
 			 new EValidator.Descriptor() {
+				 @Override
 				 public EValidator getEValidator() {
 					 return GraphpatternValidator.INSTANCE;
 				 }
@@ -286,7 +288,6 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 		// Mark meta-data to indicate it can't be changed
 		theGraphpatternPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(GraphpatternPackage.eNS_URI, theGraphpatternPackage);
 		return theGraphpatternPackage;
@@ -297,6 +298,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getGraphPattern() {
 		return graphPatternEClass;
 	}
@@ -306,6 +308,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getGraphPattern_Nodes() {
 		return (EReference)graphPatternEClass.getEStructuralFeatures().get(0);
 	}
@@ -315,6 +318,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getGraphPattern_Pattern() {
 		return (EReference)graphPatternEClass.getEStructuralFeatures().get(1);
 	}
@@ -324,6 +328,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getGraphPattern_DependencyGraph() {
 		return (EReference)graphPatternEClass.getEStructuralFeatures().get(2);
 	}
@@ -333,6 +338,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getGraphPattern_Subgraphs() {
 		return (EReference)graphPatternEClass.getEStructuralFeatures().get(3);
 	}
@@ -342,6 +348,17 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EOperation getGraphPattern__GetNode__String() {
+		return graphPatternEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getNodePattern() {
 		return nodePatternEClass;
 	}
@@ -351,6 +368,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNodePattern_Outgoings() {
 		return (EReference)nodePatternEClass.getEStructuralFeatures().get(0);
 	}
@@ -360,6 +378,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNodePattern_Type() {
 		return (EReference)nodePatternEClass.getEStructuralFeatures().get(1);
 	}
@@ -369,6 +388,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNodePattern_Attributes() {
 		return (EReference)nodePatternEClass.getEStructuralFeatures().get(2);
 	}
@@ -378,6 +398,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNodePattern_Matching() {
 		return (EReference)nodePatternEClass.getEStructuralFeatures().get(3);
 	}
@@ -387,6 +408,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNodePattern_Incomings() {
 		return (EReference)nodePatternEClass.getEStructuralFeatures().get(4);
 	}
@@ -396,6 +418,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNodePattern_Associations() {
 		return (EReference)nodePatternEClass.getEStructuralFeatures().get(5);
 	}
@@ -405,6 +428,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getNodePattern__GetAttribute__EAttribute() {
 		return nodePatternEClass.getEOperations().get(0);
 	}
@@ -414,16 +438,8 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getNodePattern__GetOutgoing__EReference() {
-		return nodePatternEClass.getEOperations().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getNodePattern__GetOutgoings__EReference() {
 		return nodePatternEClass.getEOperations().get(2);
 	}
 
@@ -432,7 +448,8 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getNodePattern__GetIncoming__EReference() {
+	@Override
+	public EOperation getNodePattern__GetOutgoing__EReference_NodePattern() {
 		return nodePatternEClass.getEOperations().get(3);
 	}
 
@@ -441,7 +458,8 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getNodePattern__GetIncomings__EReference() {
+	@Override
+	public EOperation getNodePattern__GetOutgoing__EReference_NodePattern_Stereotype() {
 		return nodePatternEClass.getEOperations().get(4);
 	}
 
@@ -450,7 +468,18 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getNodePattern__GetIncident() {
+	@Override
+	public EOperation getNodePattern__GetOutgoings__EReference() {
+		return nodePatternEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getNodePattern__GetIncoming__EReference() {
 		return nodePatternEClass.getEOperations().get(5);
 	}
 
@@ -459,7 +488,8 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getNodePattern__GetIncident__NodePattern() {
+	@Override
+	public EOperation getNodePattern__GetIncomings__EReference() {
 		return nodePatternEClass.getEOperations().get(6);
 	}
 
@@ -468,7 +498,8 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getNodePattern__RemoveIncident() {
+	@Override
+	public EOperation getNodePattern__GetIncident() {
 		return nodePatternEClass.getEOperations().get(7);
 	}
 
@@ -477,7 +508,8 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getNodePattern__RemoveIncident__NodePattern() {
+	@Override
+	public EOperation getNodePattern__GetIncident__NodePattern() {
 		return nodePatternEClass.getEOperations().get(8);
 	}
 
@@ -486,7 +518,8 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getNodePattern__GetAdjacent() {
+	@Override
+	public EOperation getNodePattern__RemoveIncident() {
 		return nodePatternEClass.getEOperations().get(9);
 	}
 
@@ -495,6 +528,27 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EOperation getNodePattern__RemoveIncident__NodePattern() {
+		return nodePatternEClass.getEOperations().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getNodePattern__GetAdjacent() {
+		return nodePatternEClass.getEOperations().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getEdgePattern() {
 		return edgePatternEClass;
 	}
@@ -504,6 +558,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getEdgePattern_Target() {
 		return (EReference)edgePatternEClass.getEStructuralFeatures().get(0);
 	}
@@ -513,6 +568,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getEdgePattern_Source() {
 		return (EReference)edgePatternEClass.getEStructuralFeatures().get(1);
 	}
@@ -522,6 +578,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getEdgePattern_Opposite() {
 		return (EReference)edgePatternEClass.getEStructuralFeatures().get(2);
 	}
@@ -531,6 +588,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getEdgePattern_Type() {
 		return (EReference)edgePatternEClass.getEStructuralFeatures().get(3);
 	}
@@ -540,6 +598,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAttributePattern() {
 		return attributePatternEClass;
 	}
@@ -549,6 +608,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAttributePattern_Value() {
 		return (EAttribute)attributePatternEClass.getEStructuralFeatures().get(0);
 	}
@@ -558,6 +618,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAttributePattern_Type() {
 		return (EReference)attributePatternEClass.getEStructuralFeatures().get(1);
 	}
@@ -567,6 +628,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAttributePattern_Node() {
 		return (EReference)attributePatternEClass.getEStructuralFeatures().get(2);
 	}
@@ -576,6 +638,57 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EAttribute getAttributePattern_Constant() {
+		return (EAttribute)attributePatternEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getAttributePattern_Variables() {
+		return (EAttribute)attributePatternEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getAttributePattern__IsVariable() {
+		return attributePatternEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getAttributePattern__IsConstant() {
+		return attributePatternEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getAttributePattern__IsExpression() {
+		return attributePatternEClass.getEOperations().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getMatching() {
 		return matchingEClass;
 	}
@@ -585,6 +698,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getMatching_Matches() {
 		return (EReference)matchingEClass.getEStructuralFeatures().get(0);
 	}
@@ -594,6 +708,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getMatching_Node() {
 		return (EReference)matchingEClass.getEStructuralFeatures().get(1);
 	}
@@ -603,6 +718,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getMatching__Iterator() {
 		return matchingEClass.getEOperations().get(0);
 	}
@@ -612,6 +728,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getMatching__Size() {
 		return matchingEClass.getEOperations().get(1);
 	}
@@ -621,6 +738,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getMatching__IsEmpty() {
 		return matchingEClass.getEOperations().get(2);
 	}
@@ -630,6 +748,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getMatching__Add__EObject() {
 		return matchingEClass.getEOperations().get(3);
 	}
@@ -639,6 +758,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getMatching__Remove__EObject() {
 		return matchingEClass.getEOperations().get(4);
 	}
@@ -648,6 +768,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getMatching__Contains__EObject() {
 		return matchingEClass.getEOperations().get(5);
 	}
@@ -657,6 +778,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getMatching__Clear() {
 		return matchingEClass.getEOperations().get(6);
 	}
@@ -666,6 +788,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getBundle() {
 		return bundleEClass;
 	}
@@ -675,7 +798,8 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBundle_Patterns() {
+	@Override
+	public EReference getBundle_Profiles() {
 		return (EReference)bundleEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -684,7 +808,8 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBundle_Profiles() {
+	@Override
+	public EReference getBundle_Domains() {
 		return (EReference)bundleEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -693,15 +818,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBundle_Domains() {
-		return (EReference)bundleEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+	@Override
 	public EClass getEObjectList() {
 		return eObjectListEClass;
 	}
@@ -711,6 +828,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getEObjectList_Content() {
 		return (EReference)eObjectListEClass.getEStructuralFeatures().get(0);
 	}
@@ -720,6 +838,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getEObjectList_Label() {
 		return (EAttribute)eObjectListEClass.getEStructuralFeatures().get(1);
 	}
@@ -729,6 +848,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDependencyGraph() {
 		return dependencyGraphEClass;
 	}
@@ -738,6 +858,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDependencyGraph_Independent() {
 		return (EReference)dependencyGraphEClass.getEStructuralFeatures().get(0);
 	}
@@ -747,6 +868,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDependencyGraph_Graph() {
 		return (EReference)dependencyGraphEClass.getEStructuralFeatures().get(1);
 	}
@@ -756,6 +878,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDependencyGraph_Nodes() {
 		return (EReference)dependencyGraphEClass.getEStructuralFeatures().get(2);
 	}
@@ -765,6 +888,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDependencyGraph_Edges() {
 		return (EReference)dependencyGraphEClass.getEStructuralFeatures().get(3);
 	}
@@ -774,6 +898,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDependencyNode() {
 		return dependencyNodeEClass;
 	}
@@ -783,6 +908,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDependencyNode_Outgoings() {
 		return (EReference)dependencyNodeEClass.getEStructuralFeatures().get(0);
 	}
@@ -792,6 +918,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDependencyNode_Incomings() {
 		return (EReference)dependencyNodeEClass.getEStructuralFeatures().get(1);
 	}
@@ -801,6 +928,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDependencyNode_Nodes() {
 		return (EReference)dependencyNodeEClass.getEStructuralFeatures().get(2);
 	}
@@ -810,6 +938,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDependencyEdge() {
 		return dependencyEdgeEClass;
 	}
@@ -819,6 +948,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDependencyEdge_Source() {
 		return (EReference)dependencyEdgeEClass.getEStructuralFeatures().get(0);
 	}
@@ -828,6 +958,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDependencyEdge_Target() {
 		return (EReference)dependencyEdgeEClass.getEStructuralFeatures().get(1);
 	}
@@ -837,6 +968,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAssociation() {
 		return associationEClass;
 	}
@@ -846,6 +978,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAssociation_Source() {
 		return (EReference)associationEClass.getEStructuralFeatures().get(0);
 	}
@@ -855,6 +988,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAssociation_Target() {
 		return (EReference)associationEClass.getEStructuralFeatures().get(1);
 	}
@@ -864,6 +998,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getStereotype() {
 		return stereotypeEClass;
 	}
@@ -873,6 +1008,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getStereotype_Name() {
 		return (EAttribute)stereotypeEClass.getEStructuralFeatures().get(0);
 	}
@@ -882,6 +1018,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getStereotype_Profile() {
 		return (EReference)stereotypeEClass.getEStructuralFeatures().get(1);
 	}
@@ -891,6 +1028,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getParameterBinding() {
 		return parameterBindingEClass;
 	}
@@ -900,6 +1038,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getParameterBinding_Parameter() {
 		return (EReference)parameterBindingEClass.getEStructuralFeatures().get(0);
 	}
@@ -909,6 +1048,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAssignment() {
 		return assignmentEClass;
 	}
@@ -918,6 +1058,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAssignment_Assignment() {
 		return (EReference)assignmentEClass.getEStructuralFeatures().get(0);
 	}
@@ -927,6 +1068,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAssignment_Pattern() {
 		return (EReference)assignmentEClass.getEStructuralFeatures().get(1);
 	}
@@ -936,6 +1078,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getObjectBinding() {
 		return objectBindingEClass;
 	}
@@ -945,6 +1088,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getObjectBinding_Value() {
 		return (EReference)objectBindingEClass.getEStructuralFeatures().get(0);
 	}
@@ -954,6 +1098,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getValueBinding() {
 		return valueBindingEClass;
 	}
@@ -963,6 +1108,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getValueBinding_Value() {
 		return (EAttribute)valueBindingEClass.getEStructuralFeatures().get(0);
 	}
@@ -972,6 +1118,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSubGraph() {
 		return subGraphEClass;
 	}
@@ -981,6 +1128,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSubGraph_Elements() {
 		return (EReference)subGraphEClass.getEStructuralFeatures().get(0);
 	}
@@ -990,6 +1138,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSubGraph_Subgraphs() {
 		return (EReference)subGraphEClass.getEStructuralFeatures().get(1);
 	}
@@ -999,6 +1148,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getGraphElement() {
 		return graphElementEClass;
 	}
@@ -1008,7 +1158,8 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getGraphElement_Subgraph() {
+	@Override
+	public EReference getGraphElement_Subgraphs() {
 		return (EReference)graphElementEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1017,6 +1168,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getGraphElement_Graph() {
 		return (EReference)graphElementEClass.getEStructuralFeatures().get(1);
 	}
@@ -1026,6 +1178,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getProfile() {
 		return profileEClass;
 	}
@@ -1035,6 +1188,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getProfile_Stereotypes() {
 		return (EReference)profileEClass.getEStructuralFeatures().get(0);
 	}
@@ -1044,6 +1198,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getProfile_Name() {
 		return (EAttribute)profileEClass.getEStructuralFeatures().get(1);
 	}
@@ -1053,6 +1208,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getProfile_Description() {
 		return (EAttribute)profileEClass.getEStructuralFeatures().get(2);
 	}
@@ -1062,6 +1218,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getProfile_Id() {
 		return (EAttribute)profileEClass.getEStructuralFeatures().get(3);
 	}
@@ -1071,6 +1228,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getProfile__GetStereotype__String() {
 		return profileEClass.getEOperations().get(0);
 	}
@@ -1080,6 +1238,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getResource() {
 		return resourceEClass;
 	}
@@ -1089,6 +1248,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getResource_Contents() {
 		return (EReference)resourceEClass.getEStructuralFeatures().get(0);
 	}
@@ -1098,6 +1258,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getExtendable() {
 		return extendableEClass;
 	}
@@ -1107,6 +1268,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getExtendable_Stereotypes() {
 		return (EReference)extendableEClass.getEStructuralFeatures().get(0);
 	}
@@ -1116,6 +1278,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPattern() {
 		return patternEClass;
 	}
@@ -1125,6 +1288,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPattern_Graphs() {
 		return (EReference)patternEClass.getEStructuralFeatures().get(0);
 	}
@@ -1134,6 +1298,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPattern_Parameters() {
 		return (EReference)patternEClass.getEStructuralFeatures().get(1);
 	}
@@ -1143,6 +1308,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPattern_Assignments() {
 		return (EReference)patternEClass.getEStructuralFeatures().get(2);
 	}
@@ -1152,6 +1318,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPattern_Bundle() {
 		return (EReference)patternEClass.getEStructuralFeatures().get(3);
 	}
@@ -1161,7 +1328,8 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPattern_Subpatterns() {
+	@Override
+	public EReference getPattern_Patterns() {
 		return (EReference)patternEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -1170,7 +1338,8 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getPattern__GetAllGraphPatterns() {
+	@Override
+	public EOperation getPattern__GetPattern__String() {
 		return patternEClass.getEOperations().get(0);
 	}
 
@@ -1179,6 +1348,37 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EOperation getPattern__GetAllGraphPatterns() {
+		return patternEClass.getEOperations().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getPattern__GetGraph__String() {
+		return patternEClass.getEOperations().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getPattern__GetParameter__String() {
+		return patternEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getPatternElement() {
 		return patternElementEClass;
 	}
@@ -1188,6 +1388,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPatternElement_Name() {
 		return (EAttribute)patternElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -1197,6 +1398,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPatternElement_Description() {
 		return (EAttribute)patternElementEClass.getEStructuralFeatures().get(1);
 	}
@@ -1206,6 +1408,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getParameter() {
 		return parameterEClass;
 	}
@@ -1215,6 +1418,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getParameter_Pattern() {
 		return (EReference)parameterEClass.getEStructuralFeatures().get(0);
 	}
@@ -1224,6 +1428,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getEIterator() {
 		return eIteratorEDataType;
 	}
@@ -1233,6 +1438,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public GraphpatternFactory getGraphpatternFactory() {
 		return (GraphpatternFactory)getEFactoryInstance();
 	}
@@ -1261,6 +1467,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 		createEReference(graphPatternEClass, GRAPH_PATTERN__PATTERN);
 		createEReference(graphPatternEClass, GRAPH_PATTERN__DEPENDENCY_GRAPH);
 		createEReference(graphPatternEClass, GRAPH_PATTERN__SUBGRAPHS);
+		createEOperation(graphPatternEClass, GRAPH_PATTERN___GET_NODE__STRING);
 
 		nodePatternEClass = createEClass(NODE_PATTERN);
 		createEReference(nodePatternEClass, NODE_PATTERN__OUTGOINGS);
@@ -1270,8 +1477,10 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 		createEReference(nodePatternEClass, NODE_PATTERN__INCOMINGS);
 		createEReference(nodePatternEClass, NODE_PATTERN__ASSOCIATIONS);
 		createEOperation(nodePatternEClass, NODE_PATTERN___GET_ATTRIBUTE__EATTRIBUTE);
-		createEOperation(nodePatternEClass, NODE_PATTERN___GET_OUTGOING__EREFERENCE);
 		createEOperation(nodePatternEClass, NODE_PATTERN___GET_OUTGOINGS__EREFERENCE);
+		createEOperation(nodePatternEClass, NODE_PATTERN___GET_OUTGOING__EREFERENCE);
+		createEOperation(nodePatternEClass, NODE_PATTERN___GET_OUTGOING__EREFERENCE_NODEPATTERN);
+		createEOperation(nodePatternEClass, NODE_PATTERN___GET_OUTGOING__EREFERENCE_NODEPATTERN_STEREOTYPE);
 		createEOperation(nodePatternEClass, NODE_PATTERN___GET_INCOMING__EREFERENCE);
 		createEOperation(nodePatternEClass, NODE_PATTERN___GET_INCOMINGS__EREFERENCE);
 		createEOperation(nodePatternEClass, NODE_PATTERN___GET_INCIDENT);
@@ -1290,6 +1499,11 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 		createEAttribute(attributePatternEClass, ATTRIBUTE_PATTERN__VALUE);
 		createEReference(attributePatternEClass, ATTRIBUTE_PATTERN__TYPE);
 		createEReference(attributePatternEClass, ATTRIBUTE_PATTERN__NODE);
+		createEAttribute(attributePatternEClass, ATTRIBUTE_PATTERN__CONSTANT);
+		createEAttribute(attributePatternEClass, ATTRIBUTE_PATTERN__VARIABLES);
+		createEOperation(attributePatternEClass, ATTRIBUTE_PATTERN___IS_CONSTANT);
+		createEOperation(attributePatternEClass, ATTRIBUTE_PATTERN___IS_VARIABLE);
+		createEOperation(attributePatternEClass, ATTRIBUTE_PATTERN___IS_EXPRESSION);
 
 		matchingEClass = createEClass(MATCHING);
 		createEReference(matchingEClass, MATCHING__MATCHES);
@@ -1303,7 +1517,6 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 		createEOperation(matchingEClass, MATCHING___CLEAR);
 
 		bundleEClass = createEClass(BUNDLE);
-		createEReference(bundleEClass, BUNDLE__PATTERNS);
 		createEReference(bundleEClass, BUNDLE__PROFILES);
 		createEReference(bundleEClass, BUNDLE__DOMAINS);
 
@@ -1312,7 +1525,10 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 		createEReference(patternEClass, PATTERN__PARAMETERS);
 		createEReference(patternEClass, PATTERN__ASSIGNMENTS);
 		createEReference(patternEClass, PATTERN__BUNDLE);
-		createEReference(patternEClass, PATTERN__SUBPATTERNS);
+		createEReference(patternEClass, PATTERN__PATTERNS);
+		createEOperation(patternEClass, PATTERN___GET_PATTERN__STRING);
+		createEOperation(patternEClass, PATTERN___GET_PARAMETER__STRING);
+		createEOperation(patternEClass, PATTERN___GET_GRAPH__STRING);
 		createEOperation(patternEClass, PATTERN___GET_ALL_GRAPH_PATTERNS);
 
 		patternElementEClass = createEClass(PATTERN_ELEMENT);
@@ -1367,7 +1583,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 		createEReference(subGraphEClass, SUB_GRAPH__SUBGRAPHS);
 
 		graphElementEClass = createEClass(GRAPH_ELEMENT);
-		createEReference(graphElementEClass, GRAPH_ELEMENT__SUBGRAPH);
+		createEReference(graphElementEClass, GRAPH_ELEMENT__SUBGRAPHS);
 		createEReference(graphElementEClass, GRAPH_ELEMENT__GRAPH);
 
 		profileEClass = createEClass(PROFILE);
@@ -1419,7 +1635,7 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 		nodePatternEClass.getESuperTypes().add(this.getGraphElement());
 		edgePatternEClass.getESuperTypes().add(this.getGraphElement());
 		attributePatternEClass.getESuperTypes().add(this.getGraphElement());
-		bundleEClass.getESuperTypes().add(this.getPatternElement());
+		bundleEClass.getESuperTypes().add(this.getPattern());
 		patternEClass.getESuperTypes().add(this.getPatternElement());
 		patternElementEClass.getESuperTypes().add(this.getExtendable());
 		parameterEClass.getESuperTypes().add(this.getPatternElement());
@@ -1436,22 +1652,34 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 		initEReference(getGraphPattern_DependencyGraph(), this.getDependencyGraph(), this.getDependencyGraph_Graph(), "dependencyGraph", null, 0, 1, GraphPattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGraphPattern_Subgraphs(), this.getSubGraph(), null, "subgraphs", null, 0, -1, GraphPattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		EOperation op = initEOperation(getGraphPattern__GetNode__String(), this.getNodePattern(), "getNode", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(nodePatternEClass, NodePattern.class, "NodePattern", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getNodePattern_Outgoings(), this.getEdgePattern(), this.getEdgePattern_Source(), "outgoings", null, 0, -1, NodePattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getNodePattern_Type(), ecorePackage.getEClass(), null, "type", null, 0, 1, NodePattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNodePattern_Type(), ecorePackage.getEClass(), null, "type", null, 1, 1, NodePattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNodePattern_Attributes(), this.getAttributePattern(), this.getAttributePattern_Node(), "attributes", null, 0, -1, NodePattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNodePattern_Matching(), this.getMatching(), this.getMatching_Node(), "matching", null, 0, 1, NodePattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNodePattern_Incomings(), this.getEdgePattern(), this.getEdgePattern_Target(), "incomings", null, 0, -1, NodePattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNodePattern_Associations(), this.getAssociation(), this.getAssociation_Source(), "associations", null, 0, -1, NodePattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = initEOperation(getNodePattern__GetAttribute__EAttribute(), this.getAttributePattern(), "getAttribute", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getNodePattern__GetAttribute__EAttribute(), this.getAttributePattern(), "getAttribute", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEAttribute(), "type", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getNodePattern__GetOutgoings__EReference(), this.getEdgePattern(), "getOutgoings", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEReference(), "type", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = initEOperation(getNodePattern__GetOutgoing__EReference(), this.getEdgePattern(), "getOutgoing", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEReference(), "type", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = initEOperation(getNodePattern__GetOutgoings__EReference(), this.getEdgePattern(), "getOutgoings", 0, -1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getNodePattern__GetOutgoing__EReference_NodePattern(), this.getEdgePattern(), "getOutgoing", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEReference(), "type", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getNodePattern(), "target", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getNodePattern__GetOutgoing__EReference_NodePattern_Stereotype(), this.getEdgePattern(), "getOutgoing", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEReference(), "type", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getNodePattern(), "target", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getStereotype(), "stereotype", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = initEOperation(getNodePattern__GetIncoming__EReference(), this.getEdgePattern(), "getIncoming", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEReference(), "type", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1481,6 +1709,14 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 		initEAttribute(getAttributePattern_Value(), ecorePackage.getEString(), "value", null, 0, 1, AttributePattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAttributePattern_Type(), ecorePackage.getEAttribute(), null, "type", null, 1, 1, AttributePattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAttributePattern_Node(), this.getNodePattern(), this.getNodePattern_Attributes(), "node", null, 0, 1, AttributePattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAttributePattern_Constant(), ecorePackage.getEJavaObject(), "constant", null, 0, 1, AttributePattern.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAttributePattern_Variables(), ecorePackage.getEString(), "variables", null, 0, -1, AttributePattern.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getAttributePattern__IsConstant(), ecorePackage.getEBoolean(), "isConstant", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getAttributePattern__IsVariable(), ecorePackage.getEBoolean(), "isVariable", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getAttributePattern__IsExpression(), ecorePackage.getEBoolean(), "isExpression", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(matchingEClass, Matching.class, "Matching", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMatching_Matches(), ecorePackage.getEObject(), null, "matches", null, 0, -1, Matching.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -1488,23 +1724,22 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 
 		initEOperation(getMatching__Iterator(), this.getEIterator(), "iterator", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getMatching__Size(), ecorePackage.getEInt(), "size", 0, 1, IS_UNIQUE, IS_ORDERED);
+		initEOperation(getMatching__Size(), ecorePackage.getEInt(), "size", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getMatching__IsEmpty(), ecorePackage.getEBoolean(), "isEmpty", 0, 1, IS_UNIQUE, IS_ORDERED);
+		initEOperation(getMatching__IsEmpty(), ecorePackage.getEBoolean(), "isEmpty", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = initEOperation(getMatching__Add__EObject(), null, "add", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEObject(), "match", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = initEOperation(getMatching__Remove__EObject(), ecorePackage.getEBoolean(), "remove", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getMatching__Remove__EObject(), ecorePackage.getEBoolean(), "remove", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEObject(), "match", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = initEOperation(getMatching__Contains__EObject(), ecorePackage.getEBoolean(), "contains", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getMatching__Contains__EObject(), ecorePackage.getEBoolean(), "contains", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEObject(), "match", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEOperation(getMatching__Clear(), null, "clear", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(bundleEClass, Bundle.class, "Bundle", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBundle_Patterns(), this.getPattern(), null, "patterns", null, 0, -1, Bundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBundle_Profiles(), this.getProfile(), null, "profiles", null, 0, -1, Bundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBundle_Domains(), ecorePackage.getEPackage(), null, "domains", null, 0, -1, Bundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1513,7 +1748,16 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 		initEReference(getPattern_Parameters(), this.getParameter(), this.getParameter_Pattern(), "parameters", null, 0, -1, Pattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPattern_Assignments(), this.getAssignment(), this.getAssignment_Pattern(), "assignments", null, 0, -1, Pattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPattern_Bundle(), this.getBundle(), null, "bundle", null, 0, 1, Pattern.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getPattern_Subpatterns(), this.getPattern(), null, "subpatterns", null, 0, -1, Pattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPattern_Patterns(), this.getPattern(), null, "patterns", null, 0, -1, Pattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = initEOperation(getPattern__GetPattern__String(), this.getPattern(), "getPattern", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getPattern__GetParameter__String(), this.getParameter(), "getParameter", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getPattern__GetGraph__String(), this.getGraphPattern(), "getGraph", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEOperation(getPattern__GetAllGraphPatterns(), this.getGraphPattern(), "getAllGraphPatterns", 0, -1, IS_UNIQUE, IS_ORDERED);
 
@@ -1565,11 +1809,11 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 		initEAttribute(getValueBinding_Value(), ecorePackage.getEString(), "value", null, 0, 1, ValueBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(subGraphEClass, SubGraph.class, "SubGraph", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSubGraph_Elements(), this.getGraphElement(), this.getGraphElement_Subgraph(), "elements", null, 0, -1, SubGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSubGraph_Elements(), this.getGraphElement(), this.getGraphElement_Subgraphs(), "elements", null, 0, -1, SubGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSubGraph_Subgraphs(), this.getSubGraph(), null, "subgraphs", null, 0, -1, SubGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(graphElementEClass, GraphElement.class, "GraphElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getGraphElement_Subgraph(), this.getSubGraph(), this.getSubGraph_Elements(), "subgraph", null, 0, 1, GraphElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGraphElement_Subgraphs(), this.getSubGraph(), this.getSubGraph_Elements(), "subgraphs", null, 0, -1, GraphElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGraphElement_Graph(), this.getGraphPattern(), null, "graph", null, 1, 1, GraphElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(profileEClass, Profile.class, "Profile", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1594,8 +1838,28 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 		createResource(eNS_URI);
 
 		// Create annotations
+		// http://www.eclipse.org/OCL/Import
+		createImportAnnotations();
 		// http://www.eclipse.org/emf/2002/Ecore
 		createEcoreAnnotations();
+		// http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot
+		createPivotAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/OCL/Import</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createImportAnnotations() {
+		String source = "http://www.eclipse.org/OCL/Import";
+		addAnnotation
+		  (this,
+		   source,
+		   new String[] {
+			   "ecore", "http://www.eclipse.org/emf/2002/Ecore"
+		   });
 	}
 
 	/**
@@ -1605,24 +1869,77 @@ public class GraphpatternPackageImpl extends EPackageImpl implements Graphpatter
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";	
+		String source = "http://www.eclipse.org/emf/2002/Ecore";
 		addAnnotation
-		  (edgePatternEClass, 
-		   source, 
+		  (this,
+		   source,
 		   new String[] {
-			 "constraints", "TheOppositeOfTheOppositeMayNotBeAReferenceDifferentFromThisOne\r\nTheOppositeMayNotBeItsOwnOpposite\r\nTheOppositeTypesAreNotMetaModelConform\r\nEdgeSourceAndTypeAreNotMetaModelConform\r\nEdgeTargetAndTypeAreNotMetaModelConform"
-		   });	
+			   "invocationDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
+			   "settingDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
+			   "validationDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"
+		   });
 		addAnnotation
-		  (attributePatternEClass, 
-		   source, 
+		  (nodePatternEClass,
+		   source,
 		   new String[] {
-			 "constraints", "TheAttributeTypeAndTheContainingClassAreNotMetaModelConform\r\nTheNameOfTheAttributeVariableIsEqualToANameOfANode"
-		   });	
+			   "constraints", "TheNameOfANodeMustBeUniqueWithinAGraph"
+		   });
 		addAnnotation
-		  (parameterEClass, 
-		   source, 
+		  (edgePatternEClass,
+		   source,
 		   new String[] {
-			 "constraints", "TheNameOfTheParameterIsNotUnique"
+			   "constraints", "TheOppositeOfTheOppositeMayNotBeAReferenceDifferentFromThisOne TheOppositeMayNotBeItsOwnOpposite TheOppositeTypesAreNotMetaModelConform EdgeSourceAndTypeAreNotMetaModelConform EdgeTargetAndTypeAreNotMetaModelConform"
+		   });
+		addAnnotation
+		  (attributePatternEClass,
+		   source,
+		   new String[] {
+			   "constraints", "TheAttributeTypeAndTheContainingClassAreNotMetaModelConform TheNameOfTheAttributeVariableIsEqualToANameOfANode"
+		   });
+		addAnnotation
+		  (parameterEClass,
+		   source,
+		   new String[] {
+			   "constraints", "TheNameOfTheParameterIsNotUnique"
+		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createPivotAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot";
+		addAnnotation
+		  (nodePatternEClass,
+		   source,
+		   new String[] {
+			   "TheNameOfANodeMustBeUniqueWithinAGraph", "not(self.graph.nodes->exists(n | n <> self and n.name <> null and n.name = self.name))"
+		   });
+		addAnnotation
+		  (edgePatternEClass,
+		   source,
+		   new String[] {
+			   "TheOppositeOfTheOppositeMayNotBeAReferenceDifferentFromThisOne", "(self.opposite <> null) implies (self.opposite.opposite = self)",
+			   "TheOppositeMayNotBeItsOwnOpposite", "self.opposite <> self",
+			   "TheOppositeTypesAreNotMetaModelConform", "((self.opposite <> null) and (self.type.eOpposite <> null)) implies (self.opposite.type = self.type.eOpposite)",
+			   "EdgeSourceAndTypeAreNotMetaModelConform", "((self.type <> null) and (self.source <> null) and (self.source.type <> null)) implies self.source.type.eAllReferences->includes(self.type)",
+			   "EdgeTargetAndTypeAreNotMetaModelConform", "((self.type <> null) and (self.target <> null) and (self.target.type <> null)) implies ((self.type.eType = self.target.type) or (self.target.type.eAllSuperTypes->includes(self.type.eType) or (self.type.eType.instanceTypeName = \'org.eclipse.emf.ecore.EObject\')))"
+		   });
+		addAnnotation
+		  (attributePatternEClass,
+		   source,
+		   new String[] {
+			   "TheAttributeTypeAndTheContainingClassAreNotMetaModelConform", "((self.type <> null) and (self.node <> null) and (self.node.type <> null)) implies (self.node.type.eAllAttributes->includes(self.type))",
+			   "TheNameOfTheAttributeVariableIsEqualToANameOfANode", "not(self.isVariable() and self.graph.nodes->exists(n | (n.name <> null) and n.name = self.name))"
+		   });
+		addAnnotation
+		  (parameterEClass,
+		   source,
+		   new String[] {
+			   "TheNameOfTheParameterIsNotUnique", "not(self.pattern.parameters->exists(p |p <> self and p.name = self.name))"
 		   });
 	}
 

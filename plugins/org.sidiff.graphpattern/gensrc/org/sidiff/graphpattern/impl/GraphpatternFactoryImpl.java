@@ -2,10 +2,14 @@
  */
 package org.sidiff.graphpattern.impl;
 
+import java.util.Arrays;
+
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.sidiff.graphpattern.Assignment;
@@ -127,6 +131,7 @@ public class GraphpatternFactoryImpl extends EFactoryImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public GraphPattern createGraphPattern() {
 		GraphPatternImpl graphPattern = new GraphPatternImpl();
 		return graphPattern;
@@ -137,29 +142,53 @@ public class GraphpatternFactoryImpl extends EFactoryImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NodePattern createNodePattern() {
 		NodePatternImpl nodePattern = new NodePatternImpl();
 		return nodePattern;
 	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public NodePattern createNodePattern(GraphPattern graph, String name, EClass type, Stereotype... stereotypes) {
+		NodePattern node = createNodePattern();
+		node.setName(name);
+		node.setType(type);
+		node.getStereotypes().addAll(Arrays.asList(stereotypes));
+		
+		graph.getNodes().add(node);
+		return node;
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EdgePattern createEdgePattern() {
 		EdgePatternImpl edgePattern = new EdgePatternImpl();
 		return edgePattern;
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public AttributePattern createAttributePattern() {
-		AttributePatternImpl attributePattern = new AttributePatternImpl();
-		return attributePattern;
+	@Override
+	public EdgePattern createEdgePattern(NodePattern source, EReference type, NodePattern target, Stereotype... stereotypes) {
+		EdgePattern edge = createEdgePattern();
+		edge.setSource(source);
+		edge.setTarget(target);
+		edge.setType(type);
+		edge.getStereotypes().addAll(Arrays.asList(stereotypes));
+		
+		return edge;
 	}
 
 	/**
@@ -167,6 +196,34 @@ public class GraphpatternFactoryImpl extends EFactoryImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public AttributePattern createAttributePattern() {
+		AttributePatternImpl attributePattern = new AttributePatternImpl();
+		return attributePattern;
+	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public AttributePattern createAttributePattern(NodePattern node, EAttribute type, String value, Stereotype... stereotypes) {
+		AttributePattern attribute = createAttributePattern();
+		attribute.setNode(node);
+		attribute.setType(type);
+		attribute.setValue(value);
+		attribute.getStereotypes().addAll(Arrays.asList(stereotypes));
+		
+		return attribute;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Bundle createBundle() {
 		BundleImpl bundle = new BundleImpl();
 		return bundle;
@@ -177,6 +234,7 @@ public class GraphpatternFactoryImpl extends EFactoryImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EObjectList createEObjectList() {
 		EObjectListImpl eObjectList = new EObjectListImpl();
 		return eObjectList;
@@ -187,6 +245,7 @@ public class GraphpatternFactoryImpl extends EFactoryImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DependencyGraph createDependencyGraph() {
 		DependencyGraphImpl dependencyGraph = new DependencyGraphImpl();
 		return dependencyGraph;
@@ -197,6 +256,7 @@ public class GraphpatternFactoryImpl extends EFactoryImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DependencyNode createDependencyNode() {
 		DependencyNodeImpl dependencyNode = new DependencyNodeImpl();
 		return dependencyNode;
@@ -207,6 +267,7 @@ public class GraphpatternFactoryImpl extends EFactoryImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DependencyEdge createDependencyEdge() {
 		DependencyEdgeImpl dependencyEdge = new DependencyEdgeImpl();
 		return dependencyEdge;
@@ -217,6 +278,7 @@ public class GraphpatternFactoryImpl extends EFactoryImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Association createAssociation() {
 		AssociationImpl association = new AssociationImpl();
 		return association;
@@ -227,6 +289,7 @@ public class GraphpatternFactoryImpl extends EFactoryImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Stereotype createStereotype() {
 		StereotypeImpl stereotype = new StereotypeImpl();
 		return stereotype;
@@ -237,6 +300,7 @@ public class GraphpatternFactoryImpl extends EFactoryImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Assignment createAssignment() {
 		AssignmentImpl assignment = new AssignmentImpl();
 		return assignment;
@@ -247,6 +311,7 @@ public class GraphpatternFactoryImpl extends EFactoryImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ObjectBinding createObjectBinding() {
 		ObjectBindingImpl objectBinding = new ObjectBindingImpl();
 		return objectBinding;
@@ -257,6 +322,7 @@ public class GraphpatternFactoryImpl extends EFactoryImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ValueBinding createValueBinding() {
 		ValueBindingImpl valueBinding = new ValueBindingImpl();
 		return valueBinding;
@@ -267,6 +333,7 @@ public class GraphpatternFactoryImpl extends EFactoryImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SubGraph createSubGraph() {
 		SubGraphImpl subGraph = new SubGraphImpl();
 		return subGraph;
@@ -277,6 +344,7 @@ public class GraphpatternFactoryImpl extends EFactoryImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Profile createProfile() {
 		ProfileImpl profile = new ProfileImpl();
 		return profile;
@@ -287,6 +355,7 @@ public class GraphpatternFactoryImpl extends EFactoryImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Pattern createPattern() {
 		PatternImpl pattern = new PatternImpl();
 		return pattern;
@@ -297,6 +366,7 @@ public class GraphpatternFactoryImpl extends EFactoryImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Parameter createParameter() {
 		ParameterImpl parameter = new ParameterImpl();
 		return parameter;
@@ -307,6 +377,7 @@ public class GraphpatternFactoryImpl extends EFactoryImpl implements Graphpatter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public GraphpatternPackage getGraphpatternPackage() {
 		return (GraphpatternPackage)getEPackage();
 	}

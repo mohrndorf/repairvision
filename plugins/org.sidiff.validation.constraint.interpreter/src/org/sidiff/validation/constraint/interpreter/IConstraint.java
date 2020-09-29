@@ -2,9 +2,9 @@ package org.sidiff.validation.constraint.interpreter;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.sidiff.validation.constraint.interpreter.decisiontree.IDecisionNode;
-import org.sidiff.validation.constraint.interpreter.formulas.binary.Formula;
-import org.sidiff.validation.constraint.interpreter.scope.IScopeRecorder;
+import org.sidiff.revision.impact.changetree.IDecisionNode;
+import org.sidiff.revision.impact.changetree.scope.IScopeRecorder;
+import org.sidiff.validation.constraint.interpreter.formulas.Formula;
 
 public interface IConstraint extends INamedElement {
 

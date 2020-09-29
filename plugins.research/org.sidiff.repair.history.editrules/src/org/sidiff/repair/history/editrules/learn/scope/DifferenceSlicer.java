@@ -7,31 +7,31 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.sidiff.consistency.common.emf.ModelingUtil;
-import org.sidiff.difference.symmetric.AddObject;
-import org.sidiff.difference.symmetric.AddReference;
-import org.sidiff.difference.symmetric.AttributeValueChange;
-import org.sidiff.difference.symmetric.Change;
-import org.sidiff.difference.symmetric.RemoveObject;
-import org.sidiff.difference.symmetric.RemoveReference;
-import org.sidiff.editrule.tools.recorder.filters.IObjectFilter;
-import org.sidiff.editrule.tools.recorder.filters.IReferenceFilter;
-import org.sidiff.matching.model.Correspondence;
+import org.sidiff.revision.common.emf.ModelingUtil;
+import org.sidiff.revision.difference.AddObject;
+import org.sidiff.revision.difference.AddReference;
+import org.sidiff.revision.difference.AttributeValueChange;
+import org.sidiff.revision.difference.Change;
+import org.sidiff.revision.difference.Correspondence;
+import org.sidiff.revision.difference.RemoveObject;
+import org.sidiff.revision.difference.RemoveReference;
+import org.sidiff.revision.editrules.generation.difference.configuration.filters.model.IObjectFilter;
+import org.sidiff.revision.editrules.generation.difference.configuration.filters.model.IReferenceFilter;
 
 public class DifferenceSlicer {
 	
 	/**
-	 * Difference slicing criterion: historical, resolved
+	 * RevisionDifference slicing criterion: historical, resolved
 	 */
 	protected DifferenceSlicingCriterion slicingCriterion;
 	
 	/**
-	 * Difference navigation: historical, resolved
+	 * RevisionDifference navigation: historical, resolved
 	 */
 	protected DifferenceNavigation navigation;
 	
 	/**
-	 * Difference slice: historical, resolved
+	 * RevisionDifference slice: historical, resolved
 	 */
 	protected DifferenceSlice slice;
 	
@@ -89,7 +89,7 @@ public class DifferenceSlicer {
 		if (change instanceof RemoveReference) {
 			RemoveReference removeReference = (RemoveReference) change;
 			return slicingCriterion.getHistoricalReferenceFilter()
-					.filter(removeReference.getSrc(), removeReference.getTgt(), removeReference.getType());
+					.filter(removeReference.getSrc(), removeReference.getType(), removeReference.getTgt());
 		}
 		
 		else if (change instanceof AttributeValueChange) {
@@ -139,7 +139,7 @@ public class DifferenceSlicer {
 		if (change instanceof AddReference) {
 			AddReference addReference = (AddReference) change;
 			return slicingCriterion.getRevisedReferenceFilter()
-					.filter(addReference.getSrc(), addReference.getTgt(), addReference.getType());
+					.filter(addReference.getSrc(), addReference.getType(), addReference.getTgt());
 		}
 
 		else if (change instanceof AttributeValueChange) {
@@ -240,7 +240,7 @@ public class DifferenceSlicer {
 						
 						if (!slicingCriterion.getClassBlacklist().contains(target.eClass())) {
 							if (!objectFilter.filter(target)) {
-								if (!referenceFilter.filter(scopeElement, target, reference)) {
+								if (!referenceFilter.filter(scopeElement, reference, target)) {
 									int lastTargetDistance = expandedScope.getOrDefault(target, -1);
 									
 									// Optimization: Reached target object on a shorter path?
@@ -264,7 +264,7 @@ public class DifferenceSlicer {
 					for (EObject target : navigation.getTargets(scopeElement, reference, true)) {
 						if (!slicingCriterion.getClassBlacklist().contains(target.eClass())) {
 							if (!objectFilter.filter(target)) {
-								if (!referenceFilter.filter(scopeElement, target, reference)) {
+								if (!referenceFilter.filter(scopeElement, reference, target)) {
 									int lastTargetDistance = expandedScope.getOrDefault(target, -1);
 									
 									// Optimization: Reached target object on a shorter path?

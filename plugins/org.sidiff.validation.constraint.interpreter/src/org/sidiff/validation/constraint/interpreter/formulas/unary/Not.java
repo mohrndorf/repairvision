@@ -1,8 +1,8 @@
 package org.sidiff.validation.constraint.interpreter.formulas.unary;
 
-import org.sidiff.validation.constraint.interpreter.decisiontree.IDecisionBranch;
-import org.sidiff.validation.constraint.interpreter.formulas.binary.Formula;
-import org.sidiff.validation.constraint.interpreter.scope.IScopeRecorder;
+import org.sidiff.revision.impact.changetree.IDecisionBranch;
+import org.sidiff.revision.impact.changetree.scope.IScopeRecorder;
+import org.sidiff.validation.constraint.interpreter.formulas.Formula;
 
 public class Not extends UnaryFormula {
 
@@ -20,6 +20,11 @@ public class Not extends UnaryFormula {
 	public boolean evaluate(IScopeRecorder scope, boolean optimize) {
 		result = !child.evaluate(scope, optimize);
 		return result;
+	}
+	
+	@Override
+	public void analyze(IDecisionBranch parent, boolean expected) {
+		child.analyze(parent, !expected);
 	}
 	
 	@Override

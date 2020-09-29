@@ -1,9 +1,10 @@
 package org.sidiff.validation.constraint.interpreter.formulas.binary;
 
-import org.sidiff.validation.constraint.interpreter.decisiontree.Alternative;
-import org.sidiff.validation.constraint.interpreter.decisiontree.IDecisionBranch;
-import org.sidiff.validation.constraint.interpreter.decisiontree.Sequence;
-import org.sidiff.validation.constraint.interpreter.scope.IScopeRecorder;
+import org.sidiff.revision.impact.changetree.Alternative;
+import org.sidiff.revision.impact.changetree.IDecisionBranch;
+import org.sidiff.revision.impact.changetree.Sequence;
+import org.sidiff.revision.impact.changetree.scope.IScopeRecorder;
+import org.sidiff.validation.constraint.interpreter.formulas.Formula;
 
 public class And extends BinaryFormula {
 
@@ -29,6 +30,24 @@ public class And extends BinaryFormula {
 		}
 		
 		return result;
+	}
+	
+	@Override
+	public void analyze(IDecisionBranch parent, boolean expected) {
+		
+		if (expected) {
+
+			// t t
+			Sequence sequence = Sequence.nextSequence(parent);
+			left.analyze(sequence, true);
+			right.analyze(sequence, true);
+		} else {
+			
+			// f f / f t / t f
+			Alternative alternative = Alternative.nextAlternative(parent);
+			left.analyze(alternative, false);
+			right.analyze(alternative, false);
+		}
 	}
 	
 	@Override

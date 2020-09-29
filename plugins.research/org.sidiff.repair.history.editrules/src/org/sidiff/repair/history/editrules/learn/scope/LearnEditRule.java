@@ -1,33 +1,32 @@
 package org.sidiff.repair.history.editrules.learn.scope;
 
-import static org.sidiff.difference.technical.api.TechnicalDifferenceFacade.deriveTechnicalDifference;
+import static org.sidiff.revision.difference.api.DifferenceFacade.difference;
 
-import java.io.IOException;
-import java.util.Collections;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.henshin.model.Attribute;
+import org.eclipse.emf.henshin.model.Edge;
 import org.eclipse.emf.henshin.model.Module;
-import org.eclipse.swt.widgets.Display;
-import org.sidiff.common.emf.exceptions.InvalidModelException;
-import org.sidiff.common.emf.exceptions.NoCorrespondencesException;
-import org.sidiff.consistency.common.ui.util.WorkbenchUtil;
-import org.sidiff.difference.symmetric.SymmetricDifference;
-import org.sidiff.difference.technical.api.settings.DifferenceSettings;
-import org.sidiff.editrule.tools.recorder.DifferenceToEditRule;
-import org.sidiff.editrule.tools.recorder.TransformationSetup;
-import org.sidiff.editrule.tools.recorder.filters.IAttributeFilter;
-import org.sidiff.editrule.tools.recorder.filters.IReferenceFilter;
-import org.sidiff.editrule.tools.util.EditRuleUtil;
-import org.sidiff.editrule.tools.util.HenshinDiagramUtil;
+import org.eclipse.emf.henshin.model.Node;
+import org.eclipse.emf.henshin.model.Rule;
+import org.sidiff.revision.common.ui.workbench.WorkbenchUtil;
+import org.sidiff.revision.difference.Difference;
+import org.sidiff.revision.difference.api.settings.DifferenceSettings;
+import org.sidiff.revision.editrules.generation.difference.DifferenceToEditRule;
+import org.sidiff.revision.editrules.generation.difference.builder.HenshinBuilder;
+import org.sidiff.revision.editrules.generation.difference.configuration.SymmetricModelDifference;
+import org.sidiff.revision.editrules.generation.difference.configuration.TransformationConfiguration;
+import org.sidiff.revision.editrules.generation.difference.configuration.filters.model.IAttributeFilter;
+import org.sidiff.revision.editrules.generation.difference.configuration.filters.model.IReferenceFilter;
+import org.sidiff.revision.editrules.generation.difference.util.DifferenceToEditRuleUtil;
+import org.sidiff.revision.impact.changetree.scope.IScopeRecorder;
+import org.sidiff.revision.impact.changetree.scope.ScopeRecorder;
 import org.sidiff.validation.constraint.api.util.Validation;
 import org.sidiff.validation.constraint.interpreter.IConstraint;
-import org.sidiff.validation.constraint.interpreter.scope.IScopeRecorder;
-import org.sidiff.validation.constraint.interpreter.scope.ScopeRecorder;
 
 /**
  * Learns an edit rule from a resolved inconsistency.
@@ -54,10 +53,10 @@ public class LearnEditRule {
 	/**
 	 * Mapping from historical model version to resolved model version.
 	 */
-	protected SymmetricDifference historicalToResolved; 
+	protected Difference historicalToResolved; 
 	
 	/**
-	 * Difference navigation: historical, resolved
+	 * RevisionDifference navigation: historical, resolved
 	 */
 	protected DifferenceNavigation navigation;
 	
@@ -66,7 +65,12 @@ public class LearnEditRule {
 	 */
 	protected DifferenceSlicer slicer;
 	
-	public LearnEditRule(SymmetricDifference historicalToResolved) {
+	/**
+	 * Graph transformation language binding.
+	 */
+	protected HenshinBuilder language = new HenshinBuilder();
+	
+	public LearnEditRule(Difference historicalToResolved) {
 		
 		this.modelHistorical = historicalToResolved.getModelA();
 		this.modelCurrent = historicalToResolved.getModelB();
@@ -85,11 +89,7 @@ public class LearnEditRule {
 		// Calculate difference: Historical -> Resolved
 		this.matchingSettings = matchingSettings;
 		
-		try {
-			historicalToResolved = deriveTechnicalDifference(modelHistorical, modelResolved, matchingSettings);
-		} catch (InvalidModelException | NoCorrespondencesException e) {
-			e.printStackTrace();
-		}
+		historicalToResolved = difference(modelHistorical, modelResolved, matchingSettings);
 		
 		this.navigation = new DifferenceNavigation(historicalToResolved);
 	}
@@ -101,23 +101,15 @@ public class LearnEditRule {
 	 *            The violated consistency rule.
 	 */
 	public DifferenceSlice learnByResolvedInconsistency(EObject invalidContext, IConstraint consistencyRule) {
-		
-		try {
-			
-			// Calculate mapping from introduced model version to resolved model version:
-			SymmetricDifference invalidToResolved = deriveTechnicalDifference(
-					invalidContext.eResource(), modelCurrent, matchingSettings);
-			
-			// Search resolved context element:
-			EObject contextResolved = invalidToResolved.getCorrespondingObjectInB(invalidContext);
-			
-			// Learn edit-rule:
-			return learnByConsistentChange(contextResolved, consistencyRule);
-			
-		} catch (InvalidModelException | NoCorrespondencesException e) {
-			e.printStackTrace();
-		}
-		return null;
+
+		// Calculate mapping from introduced model version to resolved model version:
+		Difference invalidToResolved = difference(invalidContext.eResource(), modelCurrent, matchingSettings);
+
+		// Search resolved context element:
+		EObject contextResolved = invalidToResolved.getCorrespondingObjectInB(invalidContext);
+
+		// Learn edit-rule:
+		return learnByConsistentChange(contextResolved, consistencyRule);
 	}
 	
 	/**
@@ -142,9 +134,9 @@ public class LearnEditRule {
 		
 		return learnByConsistentChange( 
 				scopeResolved.getScope(),
-				IReferenceFilter.DUMMY, IAttributeFilter.DUMMY,
+				IReferenceFilter.FILTER_NONE, IAttributeFilter.FILTER_ALL,
 				scopeResolved.getScope(),
-				IReferenceFilter.DUMMY, IAttributeFilter.DUMMY);
+				IReferenceFilter.FILTER_NONE, IAttributeFilter.FILTER_ALL);
 	}
 	
 	/**
@@ -172,7 +164,7 @@ public class LearnEditRule {
 		slicingCriterion.setRevisedReferenceFilter(revisedReferenceFilter);
 		slicingCriterion.setRevisedAttributeFilter(revisedAttributeFilter);
 		
-		// Difference Slice //
+		// RevisionDifference Slice //
 		
 		slicer = new DifferenceSlicer(slicingCriterion, navigation);
 		return slicer.getSlice();
@@ -206,56 +198,28 @@ public class LearnEditRule {
 		return validation.getRule().getName();
 	}
 	
-	public static URI generateURI(String editRuleName, Resource relativeToResource) {
-		return relativeToResource.getURI().trimSegments(1)
-				.appendSegment(editRuleName + "_execute")
-				.appendFileExtension("henshin");
+	public static URI getFolder(Resource resource) {
+		return resource.getURI().trimSegments(1);
 	}
 	
-	public static URI generateURI(String workspacePath, String editRuleName) {
-		return URI.createPlatformResourceURI(workspacePath, true)
-				.appendSegment(editRuleName + "_execute")
-				.appendFileExtension("henshin");
+	public static URI getFolder(String workspacePath) {
+		return URI.createPlatformResourceURI(workspacePath, true);
 	}
 	
-	public static Module generateEditRule(String ruleName, DifferenceSlice differenceSlice) {
+	public Module generateEditRule(String ruleName, DifferenceSlice differenceSlice) {
+		SymmetricModelDifference difference = new SymmetricModelDifference(
+				historicalToResolved, differenceSlice.getCorrespondences(), differenceSlice.getChanges());
 		
-		TransformationSetup trafoSetup = new TransformationSetup();
-		trafoSetup.setChanges(differenceSlice.getChanges());
-		trafoSetup.setCorrespondences(differenceSlice.getCorrespondences());
-		trafoSetup.setEditRuleName(ruleName);
-		
-		DifferenceToEditRule editRuleRecorder = new DifferenceToEditRule(trafoSetup);
-		return editRuleRecorder.getEditRule();
+		TransformationConfiguration trafoSetup = new TransformationConfiguration(ruleName, difference);
+		DifferenceToEditRule<Rule, Node, Edge, Attribute> editRuleRecorder 
+			= new DifferenceToEditRule<Rule, Node, Edge, Attribute>(language, trafoSetup);
+		return editRuleRecorder.transform().getModule();
 	}
 	
-	public static void saveEditRule(Module editRule, URI eoURI, boolean showDiagram, boolean showMessage) {
+	public void saveEditRule(Rule editRule, URI folder, String nameWithoutFileExtension, boolean showDiagram, boolean showMessage) {
 		
 		if (editRule != null) {
-			editRule.getImports().addAll(EditRuleUtil.getImports(editRule));
-			
-			Resource eoRes = new ResourceSetImpl().createResource(eoURI);
-			eoRes.getContents().add(editRule);
-
-			try {
-				eoRes.save(Collections.emptyMap());
-				Resource diagramResource = HenshinDiagramUtil.createDiagram(editRule);
-				
-				if (showDiagram && HenshinDiagramUtil.maxNodeCount(editRule, 100)) {
-					Display.getDefault().asyncExec(new Runnable() {
-						@Override
-						public void run() {
-							HenshinDiagramUtil.openDiagram(diagramResource);
-						}
-					});
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			if (showMessage) {
-				WorkbenchUtil.showMessage("Edit-Rule saved:\n\n" + eoURI.toPlatformString(true));
-			}
+			DifferenceToEditRuleUtil.saveEditRule(language, folder, nameWithoutFileExtension, showDiagram, showMessage, 150);
 		} else {
 			if (showMessage) {
 				WorkbenchUtil.showError("Could not transform this difference to an edit-rule.");

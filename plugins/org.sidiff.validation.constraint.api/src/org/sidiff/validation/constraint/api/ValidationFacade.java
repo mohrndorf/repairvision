@@ -6,9 +6,10 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.sidiff.consistency.common.emf.DocumentType;
-import org.sidiff.validation.constraint.api.library.ConstraintLibraryRegistry;
-import org.sidiff.validation.constraint.api.library.util.ConstraintLibraryUtil;
+import org.sidiff.revision.common.emf.document.DocumentType;
+import org.sidiff.revision.impact.changetree.IDecisionNode;
+import org.sidiff.revision.impact.changetree.scope.IScopeRecorder;
+import org.sidiff.revision.impact.changetree.scope.ScopeRecorder;
 import org.sidiff.validation.constraint.api.util.RepairValidation;
 import org.sidiff.validation.constraint.api.util.RepairValidationIterator;
 import org.sidiff.validation.constraint.api.util.RequiredValidation;
@@ -18,9 +19,8 @@ import org.sidiff.validation.constraint.api.util.ScopeValidationIterator;
 import org.sidiff.validation.constraint.api.util.Validation;
 import org.sidiff.validation.constraint.api.util.ValidationIterator;
 import org.sidiff.validation.constraint.interpreter.IConstraint;
-import org.sidiff.validation.constraint.interpreter.decisiontree.IDecisionNode;
-import org.sidiff.validation.constraint.interpreter.scope.IScopeRecorder;
-import org.sidiff.validation.constraint.interpreter.scope.ScopeRecorder;
+import org.sidiff.validation.constraint.project.registry.ConstraintLibraryRegistry;
+import org.sidiff.validation.constraint.project.registry.util.ConstraintLibraryUtil;
 
 /**
  * Access to the constraint validation.

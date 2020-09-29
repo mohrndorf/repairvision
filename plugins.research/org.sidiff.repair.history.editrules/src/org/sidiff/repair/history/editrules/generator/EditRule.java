@@ -6,23 +6,29 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.henshin.model.Module;
+import org.eclipse.emf.henshin.model.Attribute;
+import org.eclipse.emf.henshin.model.Edge;
 import org.eclipse.emf.henshin.model.Node;
-import org.sidiff.difference.symmetric.AddObject;
-import org.sidiff.difference.symmetric.Change;
-import org.sidiff.difference.symmetric.RemoveObject;
-import org.sidiff.difference.symmetric.SymmetricDifference;
-import org.sidiff.editrule.tools.recorder.DifferenceToEditRule;
-import org.sidiff.editrule.tools.recorder.TransformationSetup;
-import org.sidiff.matching.model.Correspondence;
-import org.sidiff.matching.model.MatchingModelFactory;
+import org.eclipse.emf.henshin.model.Rule;
 import org.sidiff.repair.history.editrules.learn.scope.DifferenceSlice;
 import org.sidiff.repair.history.editrules.learn.scope.LearnEditRule;
 import org.sidiff.repair.history.editrules.learn.scope.MultiScopeReferenceFilter;
 import org.sidiff.repair.history.editrules.learn.scope.ScopeAttributeFilter;
 import org.sidiff.repair.history.editrules.learn.scope.ScopeReferenceFilter;
-import org.sidiff.validation.constraint.interpreter.scope.AttributeScope;
-import org.sidiff.validation.constraint.interpreter.scope.IScopeRecorder;
+import org.sidiff.revision.difference.AddObject;
+import org.sidiff.revision.difference.Change;
+import org.sidiff.revision.difference.Correspondence;
+import org.sidiff.revision.difference.Difference;
+import org.sidiff.revision.difference.DifferenceFactory;
+import org.sidiff.revision.difference.RemoveObject;
+import org.sidiff.revision.editrules.generation.difference.DifferenceToEditRule;
+import org.sidiff.revision.editrules.generation.difference.builder.HenshinBuilder;
+import org.sidiff.revision.editrules.generation.difference.configuration.SymmetricModelDifference;
+import org.sidiff.revision.editrules.generation.difference.configuration.TransformationConfiguration;
+import org.sidiff.revision.editrules.generation.difference.configuration.filters.changes.IAddAttributeFilter;
+import org.sidiff.revision.editrules.generation.difference.util.DifferenceToEditRuleUtil;
+import org.sidiff.revision.impact.changetree.scope.AttributeScope;
+import org.sidiff.revision.impact.changetree.scope.IScopeRecorder;
 
 public class EditRule implements IEditRule {
 
@@ -30,9 +36,9 @@ public class EditRule implements IEditRule {
 	
 	protected String description;
 	
-	protected Module editRule;
+	protected Rule editRule;
 	
-	protected SymmetricDifference difference;
+	protected Difference difference;
 	
 	protected DifferenceSlice differenceSlice;
 	
@@ -42,7 +48,9 @@ public class EditRule implements IEditRule {
 	
 	protected EditRuleSignature signature;
 	
-	public EditRule(String name, SymmetricDifference difference,
+	protected HenshinBuilder language = new HenshinBuilder();
+	
+	public EditRule(String name, Difference difference,
 			IScopeRecorder fragmentA, IScopeRecorder fragmentB) {
 		
 		this.name = name;
@@ -88,7 +96,7 @@ public class EditRule implements IEditRule {
 		this.description = description;
 	}
 	
-	public SymmetricDifference getDifference() {
+	public Difference getDifference() {
 		return difference;
 	}
 	
@@ -114,7 +122,7 @@ public class EditRule implements IEditRule {
 		return differenceSlice;
 	}
 	
-	public Module getEditRule() {
+	public Rule getEditRule() {
 		
 		if (editRule == null) {
 			
@@ -123,31 +131,34 @@ public class EditRule implements IEditRule {
 			correctContext(getDifferenceSlice());
 			
 			// Convert difference to edit rule:
-			TransformationSetup trafoSetup = new TransformationSetup();
-			trafoSetup.setChanges(differenceSlice.getChanges());
-			trafoSetup.setCorrespondences(differenceSlice.getCorrespondences());
-			trafoSetup.setContextReferenceFilter(new MultiScopeReferenceFilter(fragmentA, fragmentB));
-			trafoSetup.setEditRuleName(getName());
+			SymmetricModelDifference symmetricModelDifference = new SymmetricModelDifference(
+					difference, differenceSlice.getCorrespondences(), differenceSlice.getChanges());
+			TransformationConfiguration trafoConfig = new TransformationConfiguration(
+					getName(), symmetricModelDifference);
 			
-			DifferenceToEditRule editRuleRecorder = new DifferenceToEditRule(trafoSetup) {
-				protected void createInitializationAttributes(EObject object, Node node) {}
-			};
+			trafoConfig.getFilters().setReferenceFilter(new MultiScopeReferenceFilter(fragmentA, fragmentB));
+			trafoConfig.getFilters().setAddAttributeFilter(IAddAttributeFilter.FILTER_ALL);
+			
+			DifferenceToEditRule<Rule, Node, Edge, Attribute> editRuleRecorder 
+				= new DifferenceToEditRule<Rule, Node, Edge, Attribute>(language, trafoConfig);
 			
 			for (AttributeScope lhsAttribute : fragmentA.getEqualityTests()) {
-				editRuleRecorder.addAttribute(
+				DifferenceToEditRuleUtil.addAttribute(
+						editRuleRecorder,
 						lhsAttribute.getObject(), 
 						lhsAttribute.getValue(), 
 						lhsAttribute.getType());
 			}
 
 			for (AttributeScope rhsAttribute : fragmentB.getEqualityTests()) {
-				editRuleRecorder.addAttribute(
+				DifferenceToEditRuleUtil.addAttribute(
+						editRuleRecorder,
 						rhsAttribute.getObject(), 
 						rhsAttribute.getValue(), 
 						rhsAttribute.getType());
 			}
 
-			editRule = editRuleRecorder.getEditRule();
+			editRule = editRuleRecorder.transform();
 			editRule.setDescription(description);
 		}
 		
@@ -169,7 +180,7 @@ public class EditRule implements IEditRule {
 		differenceSlice.getChanges().removeAll(convertToContext);
 		
 		for (Change change : convertToContext) {
-			Correspondence correspondence = MatchingModelFactory.eINSTANCE.createCorrespondence();
+			Correspondence correspondence = DifferenceFactory.eINSTANCE.createCorrespondence();
 			correspondence.setMatchedA(getChangedObject(change));
 			correspondence.setMatchedB(getChangedObject(change));
 			differenceSlice.getCorrespondences().add(correspondence);
@@ -228,7 +239,9 @@ public class EditRule implements IEditRule {
 		return otherEditRule.getSignature().equals(getSignature());
 	}
 	
-	public void saveEditRule(URI uri, boolean openDiagram) {
-		LearnEditRule.saveEditRule(getEditRule(), uri, openDiagram, false);
+	public void saveEditRule(URI folder, String nameWithoutFileExtension, boolean openDiagram) {
+		DifferenceToEditRuleUtil.saveEditRule(
+				language, folder, nameWithoutFileExtension,
+				openDiagram, false, 150);
 	}
 }

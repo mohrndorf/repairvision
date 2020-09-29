@@ -1,15 +1,16 @@
 package org.sidiff.validation.constraint.interpreter.formulas.quantifiers;
 
 import org.eclipse.emf.ecore.EObject;
-import org.sidiff.validation.constraint.interpreter.decisiontree.Alternative;
-import org.sidiff.validation.constraint.interpreter.decisiontree.IDecisionBranch;
-import org.sidiff.validation.constraint.interpreter.decisiontree.Sequence;
-import org.sidiff.validation.constraint.interpreter.formulas.binary.Formula;
-import org.sidiff.validation.constraint.interpreter.repair.RepairAction.RepairType;
-import org.sidiff.validation.constraint.interpreter.scope.IScopeRecorder;
+import org.sidiff.revision.impact.changetree.Alternative;
+import org.sidiff.revision.impact.changetree.IDecisionBranch;
+import org.sidiff.revision.impact.changetree.Sequence;
+import org.sidiff.revision.impact.changetree.analyze.ConstraintAction.ConstraintType;
+import org.sidiff.revision.impact.changetree.change.actions.ChangeAction.RepairType;
+import org.sidiff.revision.impact.changetree.scope.IScopeRecorder;
+import org.sidiff.validation.constraint.interpreter.formulas.Formula;
 import org.sidiff.validation.constraint.interpreter.terms.Term;
 import org.sidiff.validation.constraint.interpreter.terms.Variable;
-import org.sidiff.validation.constraint.interpreter.terms.functions.GetClosure;
+import org.sidiff.validation.constraint.interpreter.terms.functions.navigation.GetClosure;
 
 /**
  * Represents an universal quantifier.
@@ -45,6 +46,18 @@ public class ForAll extends Quantifier {
 		
 		result = true;
 		return result;
+	}
+	
+	@Override
+	public void analyze(IDecisionBranch parent, boolean expected) {
+		Sequence sequence = Sequence.nextSequence(parent);
+		formula.analyze(sequence, expected);
+		
+		if (expected) {
+			iteration.generate(sequence, ConstraintType.REQUIRE);
+		} else {
+			iteration.generate(sequence, ConstraintType.FORBID);
+		}
 	}
 	
 	@Override

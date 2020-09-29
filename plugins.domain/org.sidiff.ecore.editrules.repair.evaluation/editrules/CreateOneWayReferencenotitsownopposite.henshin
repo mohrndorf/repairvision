@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="ASCII"?>
-<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_DcW_EGXaEemxua17r6Vydg" name="Create: One-Way Reference [not its own opposite]" description="Create: One-Way Reference [not its own opposite]">
-  <units xsi:type="henshin:SequentialUnit" xmi:id="_DcW_EWXaEemxua17r6Vydg" name="mainUnit" subUnits="_DcW_FmXaEemxua17r6Vydg">
-    <parameters xmi:id="_DcW_EmXaEemxua17r6Vydg" name="classA" kind="IN"/>
-    <parameters xmi:id="_DcW_E2XaEemxua17r6Vydg" name="classB" kind="IN"/>
-    <parameterMappings xmi:id="_DcW_FGXaEemxua17r6Vydg" source="_DcW_EmXaEemxua17r6Vydg" target="_DcW_F2XaEemxua17r6Vydg"/>
-    <parameterMappings xmi:id="_DcW_FWXaEemxua17r6Vydg" source="_DcW_E2XaEemxua17r6Vydg" target="_DcW_GGXaEemxua17r6Vydg"/>
+<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_ojCsYG67EeqnUr4w5kV3sA" name="Create: One-Way Reference [not its own opposite]" description="Create: One-Way Reference [not its own opposite]">
+  <units xsi:type="henshin:SequentialUnit" xmi:id="_ojCsYW67EeqnUr4w5kV3sA" name="mainUnit" subUnits="_ojCsZm67EeqnUr4w5kV3sA">
+    <parameters xmi:id="_ojCsYm67EeqnUr4w5kV3sA" name="toClassA" kind="IN"/>
+    <parameters xmi:id="_ojCsY267EeqnUr4w5kV3sA" name="toClassB" kind="IN"/>
+    <parameterMappings xmi:id="_ojCsZG67EeqnUr4w5kV3sA" source="_ojCsYm67EeqnUr4w5kV3sA" target="_ojCsZ267EeqnUr4w5kV3sA"/>
+    <parameterMappings xmi:id="_ojCsZW67EeqnUr4w5kV3sA" source="_ojCsY267EeqnUr4w5kV3sA" target="_ojCsaG67EeqnUr4w5kV3sA"/>
   </units>
-  <units xsi:type="henshin:Rule" xmi:id="_DcW_FmXaEemxua17r6Vydg" name="Create: One-Way Reference [not its own opposite]">
-    <parameters xmi:id="_DcW_F2XaEemxua17r6Vydg" name="classA" kind="IN"/>
-    <parameters xmi:id="_DcW_GGXaEemxua17r6Vydg" name="classB" kind="IN"/>
-    <lhs xmi:id="_DcW_GWXaEemxua17r6Vydg" name="Lhs">
-      <nodes xmi:id="_DcW_GmXaEemxua17r6Vydg" name="classA">
+  <units xsi:type="henshin:Rule" xmi:id="_ojCsZm67EeqnUr4w5kV3sA" name="Create: One-Way Reference [not its own opposite]">
+    <parameters xmi:id="_ojCsZ267EeqnUr4w5kV3sA" name="toClassA" kind="IN"/>
+    <parameters xmi:id="_ojCsaG67EeqnUr4w5kV3sA" name="toClassB" kind="IN"/>
+    <lhs xmi:id="_ojCsaW67EeqnUr4w5kV3sA" name="Lhs">
+      <nodes xmi:id="_ojCsam67EeqnUr4w5kV3sA" name="toClassA">
         <type href="http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
       </nodes>
-      <nodes xmi:id="_DcW_G2XaEemxua17r6Vydg" name="classB">
+      <nodes xmi:id="_ojCsa267EeqnUr4w5kV3sA" name="toClassB">
         <type href="http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
       </nodes>
     </lhs>
-    <rhs xmi:id="_DcW_HGXaEemxua17r6Vydg" name="Rhs">
-      <nodes xmi:id="_DcW_HWXaEemxua17r6Vydg" name="classA" incoming="_DcW_ImXaEemxua17r6Vydg" outgoing="_DcW_IGXaEemxua17r6Vydg">
+    <rhs xmi:id="_ojCsbG67EeqnUr4w5kV3sA" name="Rhs">
+      <nodes xmi:id="_ojCsbW67EeqnUr4w5kV3sA" name="toClassA" incoming="_ojCscm67EeqnUr4w5kV3sA" outgoing="_ojCscG67EeqnUr4w5kV3sA">
         <type href="http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
       </nodes>
-      <nodes xmi:id="_DcW_HmXaEemxua17r6Vydg" name="classB" incoming="_DcW_IGXaEemxua17r6Vydg" outgoing="_DcW_IWXaEemxua17r6Vydg _DcW_ImXaEemxua17r6Vydg">
+      <nodes xmi:id="_ojCsbm67EeqnUr4w5kV3sA" name="newRefB" incoming="_ojCscG67EeqnUr4w5kV3sA" outgoing="_ojCscW67EeqnUr4w5kV3sA _ojCscm67EeqnUr4w5kV3sA">
         <type href="http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
       </nodes>
-      <nodes xmi:id="_DcW_H2XaEemxua17r6Vydg" name="classB" incoming="_DcW_IWXaEemxua17r6Vydg">
+      <nodes xmi:id="_ojCsb267EeqnUr4w5kV3sA" name="toClassB" incoming="_ojCscW67EeqnUr4w5kV3sA">
         <type href="http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
       </nodes>
-      <edges xmi:id="_DcW_IGXaEemxua17r6Vydg" source="_DcW_HWXaEemxua17r6Vydg" target="_DcW_HmXaEemxua17r6Vydg">
+      <edges xmi:id="_ojCscG67EeqnUr4w5kV3sA" source="_ojCsbW67EeqnUr4w5kV3sA" target="_ojCsbm67EeqnUr4w5kV3sA">
         <type href="http://www.eclipse.org/emf/2002/Ecore#//EClass/eStructuralFeatures"/>
       </edges>
-      <edges xmi:id="_DcW_IWXaEemxua17r6Vydg" source="_DcW_HmXaEemxua17r6Vydg" target="_DcW_H2XaEemxua17r6Vydg">
+      <edges xmi:id="_ojCscW67EeqnUr4w5kV3sA" source="_ojCsbm67EeqnUr4w5kV3sA" target="_ojCsb267EeqnUr4w5kV3sA">
         <type href="http://www.eclipse.org/emf/2002/Ecore#//ETypedElement/eType"/>
       </edges>
-      <edges xmi:id="_DcW_ImXaEemxua17r6Vydg" source="_DcW_HmXaEemxua17r6Vydg" target="_DcW_HWXaEemxua17r6Vydg">
+      <edges xmi:id="_ojCscm67EeqnUr4w5kV3sA" source="_ojCsbm67EeqnUr4w5kV3sA" target="_ojCsbW67EeqnUr4w5kV3sA">
         <type href="http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature/eContainingClass"/>
       </edges>
     </rhs>
-    <mappings xmi:id="_DcW_I2XaEemxua17r6Vydg" origin="_DcW_GmXaEemxua17r6Vydg" image="_DcW_HWXaEemxua17r6Vydg"/>
-    <mappings xmi:id="_DcW_JGXaEemxua17r6Vydg" origin="_DcW_G2XaEemxua17r6Vydg" image="_DcW_H2XaEemxua17r6Vydg"/>
+    <mappings xmi:id="_ojCsc267EeqnUr4w5kV3sA" origin="_ojCsam67EeqnUr4w5kV3sA" image="_ojCsbW67EeqnUr4w5kV3sA"/>
+    <mappings xmi:id="_ojCsdG67EeqnUr4w5kV3sA" origin="_ojCsa267EeqnUr4w5kV3sA" image="_ojCsb267EeqnUr4w5kV3sA"/>
   </units>
 </henshin:Module>

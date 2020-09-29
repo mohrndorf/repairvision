@@ -33,7 +33,7 @@ import org.sidiff.graphpattern.Pattern;
  *   <li>{@link org.sidiff.graphpattern.impl.PatternImpl#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.sidiff.graphpattern.impl.PatternImpl#getAssignments <em>Assignments</em>}</li>
  *   <li>{@link org.sidiff.graphpattern.impl.PatternImpl#getBundle <em>Bundle</em>}</li>
- *   <li>{@link org.sidiff.graphpattern.impl.PatternImpl#getSubpatterns <em>Subpatterns</em>}</li>
+ *   <li>{@link org.sidiff.graphpattern.impl.PatternImpl#getPatterns <em>Patterns</em>}</li>
  * </ul>
  *
  * @generated
@@ -70,14 +70,14 @@ public class PatternImpl extends PatternElementImpl implements Pattern {
 	protected EList<Assignment> assignments;
 
 	/**
-	 * The cached value of the '{@link #getSubpatterns() <em>Subpatterns</em>}' containment reference list.
+	 * The cached value of the '{@link #getPatterns() <em>Patterns</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSubpatterns()
+	 * @see #getPatterns()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Pattern> subpatterns;
+	protected EList<Pattern> patterns;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -103,6 +103,7 @@ public class PatternImpl extends PatternElementImpl implements Pattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<GraphPattern> getGraphs() {
 		if (graphs == null) {
 			graphs = new EObjectContainmentWithInverseEList<GraphPattern>(GraphPattern.class, this, GraphpatternPackage.PATTERN__GRAPHS, GraphpatternPackage.GRAPH_PATTERN__PATTERN);
@@ -115,6 +116,7 @@ public class PatternImpl extends PatternElementImpl implements Pattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Parameter> getParameters() {
 		if (parameters == null) {
 			parameters = new EObjectContainmentWithInverseEList<Parameter>(Parameter.class, this, GraphpatternPackage.PATTERN__PARAMETERS, GraphpatternPackage.PARAMETER__PATTERN);
@@ -127,6 +129,7 @@ public class PatternImpl extends PatternElementImpl implements Pattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Assignment> getAssignments() {
 		if (assignments == null) {
 			assignments = new EObjectContainmentWithInverseEList<Assignment>(Assignment.class, this, GraphpatternPackage.PATTERN__ASSIGNMENTS, GraphpatternPackage.ASSIGNMENT__PATTERN);
@@ -139,6 +142,7 @@ public class PatternImpl extends PatternElementImpl implements Pattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Bundle getBundle() {
 		Bundle bundle = basicGetBundle();
 		return bundle != null && bundle.eIsProxy() ? (Bundle)eResolveProxy((InternalEObject)bundle) : bundle;
@@ -150,14 +154,14 @@ public class PatternImpl extends PatternElementImpl implements Pattern {
 	 * @generated NOT
 	 */
 	public Bundle basicGetBundle() {
-		EObject container = eContainer();
+		EObject pattern = this; // bundle is a pattern
 		
-		while ((container != null) && !(container instanceof Bundle)) {
-			container = container.eContainer();
+		while ((pattern != null) && !(pattern instanceof Bundle)) {
+			pattern = pattern.eContainer();
 		}
 		
-		if (container instanceof Bundle) {
-			return (Bundle) container;
+		if (pattern instanceof Bundle) {
+			return (Bundle) pattern;
 		}
 		
 		return null;
@@ -168,11 +172,27 @@ public class PatternImpl extends PatternElementImpl implements Pattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Pattern> getSubpatterns() {
-		if (subpatterns == null) {
-			subpatterns = new EObjectContainmentEList<Pattern>(Pattern.class, this, GraphpatternPackage.PATTERN__SUBPATTERNS);
+	@Override
+	public EList<Pattern> getPatterns() {
+		if (patterns == null) {
+			patterns = new EObjectContainmentEList<Pattern>(Pattern.class, this, GraphpatternPackage.PATTERN__PATTERNS);
 		}
-		return subpatterns;
+		return patterns;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public Pattern getPattern(String name) {
+		for (Pattern pattern : getPatterns()) {
+			if (pattern.getName().equals(name)) {
+				return pattern;
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -191,10 +211,40 @@ public class PatternImpl extends PatternElementImpl implements Pattern {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
+	public GraphPattern getGraph(String name) {
+		for (GraphPattern graph : getGraphs()) {
+			if (graph.getName().equals(name)) {
+				return graph;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public Parameter getParameter(String name) {
+		for (Parameter parameter : getParameters()) {
+			if (parameter.getName().equals(name)) {
+				return parameter;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	protected void collectAllGraphPatterns(EList<GraphPattern> graphPatterns) {
 		graphPatterns.addAll(getGraphs());
 		
-		for (Pattern subPattern : getSubpatterns()) {
+		for (Pattern subPattern : getPatterns()) {
 			((PatternImpl) subPattern).collectAllGraphPatterns(graphPatterns);
 		}
 	}
@@ -232,8 +282,8 @@ public class PatternImpl extends PatternElementImpl implements Pattern {
 				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
 			case GraphpatternPackage.PATTERN__ASSIGNMENTS:
 				return ((InternalEList<?>)getAssignments()).basicRemove(otherEnd, msgs);
-			case GraphpatternPackage.PATTERN__SUBPATTERNS:
-				return ((InternalEList<?>)getSubpatterns()).basicRemove(otherEnd, msgs);
+			case GraphpatternPackage.PATTERN__PATTERNS:
+				return ((InternalEList<?>)getPatterns()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -255,8 +305,8 @@ public class PatternImpl extends PatternElementImpl implements Pattern {
 			case GraphpatternPackage.PATTERN__BUNDLE:
 				if (resolve) return getBundle();
 				return basicGetBundle();
-			case GraphpatternPackage.PATTERN__SUBPATTERNS:
-				return getSubpatterns();
+			case GraphpatternPackage.PATTERN__PATTERNS:
+				return getPatterns();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -282,9 +332,9 @@ public class PatternImpl extends PatternElementImpl implements Pattern {
 				getAssignments().clear();
 				getAssignments().addAll((Collection<? extends Assignment>)newValue);
 				return;
-			case GraphpatternPackage.PATTERN__SUBPATTERNS:
-				getSubpatterns().clear();
-				getSubpatterns().addAll((Collection<? extends Pattern>)newValue);
+			case GraphpatternPackage.PATTERN__PATTERNS:
+				getPatterns().clear();
+				getPatterns().addAll((Collection<? extends Pattern>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -307,8 +357,8 @@ public class PatternImpl extends PatternElementImpl implements Pattern {
 			case GraphpatternPackage.PATTERN__ASSIGNMENTS:
 				getAssignments().clear();
 				return;
-			case GraphpatternPackage.PATTERN__SUBPATTERNS:
-				getSubpatterns().clear();
+			case GraphpatternPackage.PATTERN__PATTERNS:
+				getPatterns().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -330,8 +380,8 @@ public class PatternImpl extends PatternElementImpl implements Pattern {
 				return assignments != null && !assignments.isEmpty();
 			case GraphpatternPackage.PATTERN__BUNDLE:
 				return basicGetBundle() != null;
-			case GraphpatternPackage.PATTERN__SUBPATTERNS:
-				return subpatterns != null && !subpatterns.isEmpty();
+			case GraphpatternPackage.PATTERN__PATTERNS:
+				return patterns != null && !patterns.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -344,6 +394,12 @@ public class PatternImpl extends PatternElementImpl implements Pattern {
 	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
+			case GraphpatternPackage.PATTERN___GET_PATTERN__STRING:
+				return getPattern((String)arguments.get(0));
+			case GraphpatternPackage.PATTERN___GET_PARAMETER__STRING:
+				return getParameter((String)arguments.get(0));
+			case GraphpatternPackage.PATTERN___GET_GRAPH__STRING:
+				return getGraph((String)arguments.get(0));
 			case GraphpatternPackage.PATTERN___GET_ALL_GRAPH_PATTERNS:
 				return getAllGraphPatterns();
 		}

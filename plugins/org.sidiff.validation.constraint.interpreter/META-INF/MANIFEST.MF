@@ -4,19 +4,25 @@ Bundle-Name: Abstract Repair Generator
 Bundle-SymbolicName: org.sidiff.validation.constraint.interpreter;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Export-Package: org.sidiff.validation.constraint.interpreter,
- org.sidiff.validation.constraint.interpreter.decisiontree,
+ org.sidiff.validation.constraint.interpreter.formulas,
  org.sidiff.validation.constraint.interpreter.formulas.binary,
  org.sidiff.validation.constraint.interpreter.formulas.predicates,
+ org.sidiff.validation.constraint.interpreter.formulas.predicates.collections,
+ org.sidiff.validation.constraint.interpreter.formulas.predicates.integers,
+ org.sidiff.validation.constraint.interpreter.formulas.predicates.types,
  org.sidiff.validation.constraint.interpreter.formulas.quantifiers,
  org.sidiff.validation.constraint.interpreter.formulas.unary,
- org.sidiff.validation.constraint.interpreter.repair,
- org.sidiff.validation.constraint.interpreter.scope,
  org.sidiff.validation.constraint.interpreter.terms,
- org.sidiff.validation.constraint.interpreter.terms.functions
+ org.sidiff.validation.constraint.interpreter.terms.constants,
+ org.sidiff.validation.constraint.interpreter.terms.functions,
+ org.sidiff.validation.constraint.interpreter.terms.functions.collections,
+ org.sidiff.validation.constraint.interpreter.terms.functions.navigation,
+ org.sidiff.validation.constraint.interpreter.terms.functions.strings
 Require-Bundle: org.eclipse.emf.ecore,
  org.eclipse.equinox.app,
  org.eclipse.uml2.uml,
- org.sidiff.common.emf,
- org.sidiff.consistency.common
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+ org.sidiff.revision.impact.changetree,
+ org.sidiff.revision.common.emf,
+ org.sidiff.revision.common.utilities
 Automatic-Module-Name: org.sidiff.validation.constraint.interpreter
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8

@@ -12,11 +12,11 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.dialogs.IInputValidator;
-import org.sidiff.common.emf.modelstorage.EMFHandlerUtil;
-import org.sidiff.consistency.common.ui.util.WorkbenchUtil;
 import org.sidiff.graphpattern.Bundle;
 import org.sidiff.graphpattern.GraphPattern;
 import org.sidiff.graphpattern.Pattern;
+import org.sidiff.revision.common.emf.EMFHandlerUtil;
+import org.sidiff.revision.common.ui.workbench.WorkbenchUtil;
 
 public class SplitBundle extends AbstractHandler {
 	
@@ -139,10 +139,10 @@ public class SplitBundle extends AbstractHandler {
 	}
 	
 	private boolean isEmptyPattern(Pattern pattern) {
-		if (pattern.getGraphs().isEmpty() && pattern.getSubpatterns().isEmpty()) {
+		if (pattern.getGraphs().isEmpty() && pattern.getPatterns().isEmpty()) {
 			return true;
 		} else {
-			for (Pattern subpattern : pattern.getSubpatterns()) {
+			for (Pattern subpattern : pattern.getPatterns()) {
 				if (!isEmptyPattern(subpattern)) {
 					return false;
 				}

@@ -2,14 +2,15 @@ package org.sidiff.validation.constraint.interpreter.formulas.quantifiers;
 
 import java.util.Collections;
 
-import org.sidiff.validation.constraint.interpreter.formulas.binary.Formula;
+import org.sidiff.validation.constraint.interpreter.formulas.Formula;
+import org.sidiff.validation.constraint.interpreter.formulas.FormulaImpl;
 import org.sidiff.validation.constraint.interpreter.terms.Term;
 import org.sidiff.validation.constraint.interpreter.terms.Variable;
 
 // TODO: Store evaluation iteration for repair generation!
 //       - copy the formula for each iteration step
 
-public abstract class Quantifier extends Formula {
+public abstract class Quantifier extends FormulaImpl {
 
 	// Quantifier(Type bounded in iteration : formula)
 	

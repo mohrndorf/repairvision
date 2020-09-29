@@ -19,8 +19,8 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.sidiff.graphpattern.AttributePattern;
 import org.sidiff.graphpattern.GraphpatternPackage;
 import org.sidiff.graphpattern.edit.util.ColorServices;
-import org.sidiff.graphpattern.edit.util.ItemProviderUtil;
 import org.sidiff.graphpattern.edit.util.LabelServices;
+import org.sidiff.revision.common.emf.ItemProviderUtil;
 
 /**
  * This is the item provider adapter for a {@link org.sidiff.graphpattern.AttributePattern} object.
@@ -59,6 +59,8 @@ public class AttributePatternItemProvider
 
 			addValuePropertyDescriptor(object);
 			addTypePropertyDescriptor(object);
+			addConstantPropertyDescriptor(object);
+			addVariablesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -103,6 +105,50 @@ public class AttributePatternItemProvider
 				 false,
 				 true,
 				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Constant feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addConstantPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_AttributePattern_constant_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AttributePattern_constant_feature", "_UI_AttributePattern_type"),
+				 GraphpatternPackage.Literals.ATTRIBUTE_PATTERN__CONSTANT,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Variables feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addVariablesPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_AttributePattern_variables_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AttributePattern_variables_feature", "_UI_AttributePattern_type"),
+				 GraphpatternPackage.Literals.ATTRIBUTE_PATTERN__VARIABLES,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -182,6 +228,8 @@ public class AttributePatternItemProvider
 
 		switch (notification.getFeatureID(AttributePattern.class)) {
 			case GraphpatternPackage.ATTRIBUTE_PATTERN__VALUE:
+			case GraphpatternPackage.ATTRIBUTE_PATTERN__CONSTANT:
+			case GraphpatternPackage.ATTRIBUTE_PATTERN__VARIABLES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

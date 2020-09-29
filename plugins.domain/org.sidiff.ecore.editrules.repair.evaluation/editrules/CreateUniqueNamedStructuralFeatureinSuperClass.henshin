@@ -1,64 +1,61 @@
 <?xml version="1.0" encoding="ASCII"?>
-<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_DOilgGXaEemxua17r6Vydg" name="Create: Unique Named Structural Feature in Super-Class" description="Create: Unique Named Structural Feature in Super-Class">
-  <units xsi:type="henshin:SequentialUnit" xmi:id="_DOilgWXaEemxua17r6Vydg" name="mainUnit" subUnits="_DOiliGXaEemxua17r6Vydg">
-    <parameters xmi:id="_DOilgmXaEemxua17r6Vydg" name="superClass" kind="IN"/>
-    <parameters xmi:id="_DOilg2XaEemxua17r6Vydg" name="superStructuralFeature" kind="IN"/>
-    <parameters xmi:id="_DOilhGXaEemxua17r6Vydg" name="structuralFeatureName" kind="IN"/>
-    <parameterMappings xmi:id="_DOilhWXaEemxua17r6Vydg" source="_DOilgmXaEemxua17r6Vydg" target="_DOiliWXaEemxua17r6Vydg"/>
-    <parameterMappings xmi:id="_DOilhmXaEemxua17r6Vydg" source="_DOilg2XaEemxua17r6Vydg" target="_DOilimXaEemxua17r6Vydg"/>
-    <parameterMappings xmi:id="_DOilh2XaEemxua17r6Vydg" source="_DOilhGXaEemxua17r6Vydg" target="_DOili2XaEemxua17r6Vydg"/>
+<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_odZ-cG67EeqnUr4w5kV3sA" name="Create: Unique Named Structural Feature in Super-Class" description="Create: Unique Named Structural Feature in Super-Class">
+  <units xsi:type="henshin:SequentialUnit" xmi:id="_odZ-cW67EeqnUr4w5kV3sA" name="mainUnit" subUnits="_odZ-dm67EeqnUr4w5kV3sA">
+    <parameters xmi:id="_odZ-cm67EeqnUr4w5kV3sA" name="toSuperClass" kind="IN"/>
+    <parameters xmi:id="_odZ-c267EeqnUr4w5kV3sA" name="structuralFeatureName" kind="IN"/>
+    <parameterMappings xmi:id="_odZ-dG67EeqnUr4w5kV3sA" source="_odZ-cm67EeqnUr4w5kV3sA" target="_odZ-d267EeqnUr4w5kV3sA"/>
+    <parameterMappings xmi:id="_odZ-dW67EeqnUr4w5kV3sA" source="_odZ-c267EeqnUr4w5kV3sA" target="_odZ-eG67EeqnUr4w5kV3sA"/>
   </units>
-  <units xsi:type="henshin:Rule" xmi:id="_DOiliGXaEemxua17r6Vydg" name="Create: Unique Named Structural Feature in Super-Class">
-    <parameters xmi:id="_DOiliWXaEemxua17r6Vydg" name="superClass" kind="IN"/>
-    <parameters xmi:id="_DOilimXaEemxua17r6Vydg" name="superStructuralFeature" kind="IN"/>
-    <parameters xmi:id="_DOili2XaEemxua17r6Vydg" name="structuralFeatureName" kind="IN"/>
-    <lhs xmi:id="_DOiljGXaEemxua17r6Vydg" name="Lhs">
-      <nodes xmi:id="_DOiljWXaEemxua17r6Vydg" name="superClass">
+  <units xsi:type="henshin:Rule" xmi:id="_odZ-dm67EeqnUr4w5kV3sA" name="Create: Unique Named Structural Feature in Super-Class">
+    <parameters xmi:id="_odZ-d267EeqnUr4w5kV3sA" name="toSuperClass" kind="IN"/>
+    <parameters xmi:id="_odZ-eG67EeqnUr4w5kV3sA" name="structuralFeatureName" kind="IN"/>
+    <lhs xmi:id="_odZ-eW67EeqnUr4w5kV3sA" name="Lhs">
+      <nodes xmi:id="_odZ-em67EeqnUr4w5kV3sA" name="toSuperClass">
         <type href="http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
       </nodes>
-      <formula xsi:type="henshin:Not" xmi:id="_DOiljmXaEemxua17r6Vydg">
-        <child xsi:type="henshin:NestedCondition" xmi:id="_DOilj2XaEemxua17r6Vydg">
-          <conclusion xmi:id="_DOilkGXaEemxua17r6Vydg">
-            <nodes xmi:id="_DOilkWXaEemxua17r6Vydg" name="subClass" outgoing="_DOillWXaEemxua17r6Vydg _DOillmXaEemxua17r6Vydg">
+      <formula xsi:type="henshin:Not" xmi:id="_odZ-e267EeqnUr4w5kV3sA">
+        <child xsi:type="henshin:NestedCondition" xmi:id="_odZ-fG67EeqnUr4w5kV3sA">
+          <conclusion xmi:id="_odZ-fW67EeqnUr4w5kV3sA" name="post">
+            <nodes xmi:id="_odZ-fm67EeqnUr4w5kV3sA" name="postSubClass" outgoing="_odZ-gm67EeqnUr4w5kV3sA _odZ-g267EeqnUr4w5kV3sA">
               <type href="http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
             </nodes>
-            <nodes xmi:id="_DOilkmXaEemxua17r6Vydg" name="subStructuralFeature" incoming="_DOillmXaEemxua17r6Vydg">
+            <nodes xmi:id="_odZ-f267EeqnUr4w5kV3sA" name="postSubStructuralFeature" incoming="_odZ-g267EeqnUr4w5kV3sA">
               <type href="http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature"/>
-              <attributes xmi:id="_DOilk2XaEemxua17r6Vydg" value="structuralFeatureName">
+              <attributes xmi:id="_odZ-gG67EeqnUr4w5kV3sA" value="structuralFeatureName">
                 <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
               </attributes>
             </nodes>
-            <nodes xmi:id="_DOillGXaEemxua17r6Vydg" name="superClass" incoming="_DOillWXaEemxua17r6Vydg">
+            <nodes xmi:id="_odZ-gW67EeqnUr4w5kV3sA" name="toSuperClass" incoming="_odZ-gm67EeqnUr4w5kV3sA">
               <type href="http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
             </nodes>
-            <edges xmi:id="_DOillWXaEemxua17r6Vydg" source="_DOilkWXaEemxua17r6Vydg" target="_DOillGXaEemxua17r6Vydg">
+            <edges xmi:id="_odZ-gm67EeqnUr4w5kV3sA" source="_odZ-fm67EeqnUr4w5kV3sA" target="_odZ-gW67EeqnUr4w5kV3sA">
               <type href="http://www.eclipse.org/emf/2002/Ecore#//EClass/eSuperTypes"/>
             </edges>
-            <edges xmi:id="_DOillmXaEemxua17r6Vydg" source="_DOilkWXaEemxua17r6Vydg" target="_DOilkmXaEemxua17r6Vydg">
+            <edges xmi:id="_odZ-g267EeqnUr4w5kV3sA" source="_odZ-fm67EeqnUr4w5kV3sA" target="_odZ-f267EeqnUr4w5kV3sA">
               <type href="http://www.eclipse.org/emf/2002/Ecore#//EClass/eStructuralFeatures"/>
             </edges>
           </conclusion>
-          <mappings xmi:id="_DOill2XaEemxua17r6Vydg" origin="_DOiljWXaEemxua17r6Vydg" image="_DOillGXaEemxua17r6Vydg"/>
+          <mappings xmi:id="_odZ-hG67EeqnUr4w5kV3sA" origin="_odZ-em67EeqnUr4w5kV3sA" image="_odZ-gW67EeqnUr4w5kV3sA"/>
         </child>
       </formula>
     </lhs>
-    <rhs xmi:id="_DOilmGXaEemxua17r6Vydg" name="Rhs">
-      <nodes xmi:id="_DOilmWXaEemxua17r6Vydg" name="superClass" incoming="_DOilnWXaEemxua17r6Vydg" outgoing="_DOilnGXaEemxua17r6Vydg">
+    <rhs xmi:id="_odZ-hW67EeqnUr4w5kV3sA" name="Rhs">
+      <nodes xmi:id="_odZ-hm67EeqnUr4w5kV3sA" name="toSuperClass" incoming="_odZ-im67EeqnUr4w5kV3sA" outgoing="_odZ-iW67EeqnUr4w5kV3sA">
         <type href="http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
       </nodes>
-      <nodes xmi:id="_DOilmmXaEemxua17r6Vydg" name="superStructuralFeature" incoming="_DOilnGXaEemxua17r6Vydg" outgoing="_DOilnWXaEemxua17r6Vydg">
+      <nodes xmi:id="_odZ-h267EeqnUr4w5kV3sA" name="newSuperStructuralFeature" incoming="_odZ-iW67EeqnUr4w5kV3sA" outgoing="_odZ-im67EeqnUr4w5kV3sA">
         <type href="http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature"/>
-        <attributes xmi:id="_DOilm2XaEemxua17r6Vydg" value="structuralFeatureName">
+        <attributes xmi:id="_odZ-iG67EeqnUr4w5kV3sA" value="structuralFeatureName">
           <type href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
         </attributes>
       </nodes>
-      <edges xmi:id="_DOilnGXaEemxua17r6Vydg" source="_DOilmWXaEemxua17r6Vydg" target="_DOilmmXaEemxua17r6Vydg">
+      <edges xmi:id="_odZ-iW67EeqnUr4w5kV3sA" source="_odZ-hm67EeqnUr4w5kV3sA" target="_odZ-h267EeqnUr4w5kV3sA">
         <type href="http://www.eclipse.org/emf/2002/Ecore#//EClass/eStructuralFeatures"/>
       </edges>
-      <edges xmi:id="_DOilnWXaEemxua17r6Vydg" source="_DOilmmXaEemxua17r6Vydg" target="_DOilmWXaEemxua17r6Vydg">
+      <edges xmi:id="_odZ-im67EeqnUr4w5kV3sA" source="_odZ-h267EeqnUr4w5kV3sA" target="_odZ-hm67EeqnUr4w5kV3sA">
         <type href="http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature/eContainingClass"/>
       </edges>
     </rhs>
-    <mappings xmi:id="_DOilnmXaEemxua17r6Vydg" origin="_DOiljWXaEemxua17r6Vydg" image="_DOilmWXaEemxua17r6Vydg"/>
+    <mappings xmi:id="_odZ-i267EeqnUr4w5kV3sA" origin="_odZ-em67EeqnUr4w5kV3sA" image="_odZ-hm67EeqnUr4w5kV3sA"/>
   </units>
 </henshin:Module>

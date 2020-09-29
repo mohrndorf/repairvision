@@ -2,9 +2,9 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="org.sidiff.matcher.extensionpoint">
-      <client
-            class="org.sidiff.generic.matcher.uuid.UUIDMatcher">
-      </client>
+         point="org.sidiff.revision.difference.matcher.provider">
+      <matcher
+            class="org.sidiff.generic.matcher.uuid.UUIDMatcherProvider">
+      </matcher>
    </extension>
 </plugin>

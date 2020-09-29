@@ -20,8 +20,8 @@ import org.sidiff.graphpattern.GraphpatternFactory;
 import org.sidiff.graphpattern.GraphpatternPackage;
 import org.sidiff.graphpattern.NodePattern;
 import org.sidiff.graphpattern.edit.util.ColorServices;
-import org.sidiff.graphpattern.edit.util.ItemProviderUtil;
 import org.sidiff.graphpattern.edit.util.LabelServices;
+import org.sidiff.revision.common.emf.ItemProviderUtil;
 
 /**
  * This is the item provider adapter for a {@link org.sidiff.graphpattern.NodePattern} object.

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+
+
+<plugin>
+
+   <extension
+         point="org.sidiff.revision.difference.matcher.provider">
+      <bundle
+            class="org.sidiff.generic.matcher.adapter.sidiff.SiDiffMatcherProviderAdapterBundle">
+      </bundle>
+   </extension>
+
+</plugin>

@@ -1,6 +1,5 @@
 package org.sidiff.history.analysis.tracing;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -9,27 +8,25 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.sidiff.common.emf.EMFUtil;
-import org.sidiff.common.emf.exceptions.InvalidModelException;
-import org.sidiff.common.emf.exceptions.NoCorrespondencesException;
-import org.sidiff.difference.technical.api.settings.DifferenceSettings;
 import org.sidiff.generic.matcher.uuid.UUIDResource;
 import org.sidiff.history.analysis.validation.IValidator;
-import org.sidiff.history.repository.IModelRepository;
+import org.sidiff.history.repository.IModelHistory;
 import org.sidiff.history.repository.IModelVersion;
 import org.sidiff.historymodel.History;
 import org.sidiff.historymodel.HistoryModelFactory;
 import org.sidiff.historymodel.ModelStatus;
 import org.sidiff.historymodel.Problem;
 import org.sidiff.historymodel.Version;
-import org.sidiff.matching.api.MatchingFacade;
-import org.sidiff.matching.model.Correspondence;
-import org.sidiff.matching.model.Matching;
+import org.sidiff.revision.common.emf.EMFStorage;
+import org.sidiff.revision.difference.Correspondence;
+import org.sidiff.revision.difference.Difference;
+import org.sidiff.revision.difference.api.DifferenceFacade;
+import org.sidiff.revision.difference.api.settings.DifferenceSettings;
 
 public class HistoryModelGenerator {
 	
 	public static History generateHistory(String historyName, 
-			IModelRepository repository, Iterator<IModelVersion> revisions, 
+			IModelHistory modelHistory, Iterator<IModelVersion> revisions, 
 			IValidator validator, DifferenceSettings settings) {
 		
 		History history = HistoryModelFactory.eINSTANCE.createHistory();
@@ -42,7 +39,7 @@ public class HistoryModelGenerator {
 			IModelVersion revision = revisions.next();
 			
 			ResourceSet rss = new ResourceSetImpl();
-			Resource resource = repository.loadModelVersion(rss, revision);
+			Resource resource = modelHistory.loadModelVersion(rss, revision);
 			
 			Version version = generateVersion(revision.getVersion(), resource, validator);
 			
@@ -60,25 +57,9 @@ public class HistoryModelGenerator {
 			
 			Version versionA = history.getVersions().get(i);
 			Version versionB = history.getVersions().get(j);
-			
-			// TODO: Do we need this workaround!?
-//			while (versionB.getStatus().equals(ModelStatus.DEFECT) && (j < (history.getVersions().size() - 1))) {
-//				versionB = history.getVersions().get(++j);
-//			}
-			
-			try {
-//				if (versionA.getStatus().equals(ModelStatus.DEFECT)
-//						|| versionB.getStatus().equals(ModelStatus.DEFECT)) {
-//					continue;
-//				}
 
-				Matching matching = generateMatching(versionA, versionB, settings);
-				generateUUIDs(matching);
-			} catch (InvalidModelException e) {
-				e.printStackTrace();
-			} catch (NoCorrespondencesException e) {
-				System.err.println(" No correspondences found: " + versionA.getName() + " -> " + versionB.getName());
-			}
+			Difference matching = generateMatching(versionA, versionB, settings);
+			generateUUIDs(matching);
 		}
 		
 		generateIntroducedAndResolved(history, validator);
@@ -86,9 +67,9 @@ public class HistoryModelGenerator {
 		return history;
 	}
 	
-	public static Version appendVersion(History history, IModelRepository repository, IModelVersion modelVersion, IValidator validator) {
+	public static Version appendVersion(History history, IModelHistory modelHistory, IModelVersion modelVersion, IValidator validator) {
 		
-		Resource model = repository.loadModelVersion(new ResourceSetImpl(), modelVersion);
+		Resource model = modelHistory.loadModelVersion(new ResourceSetImpl(), modelVersion);
 		Version historyVersion = HistoryModelGenerator.generateVersion(
 				modelVersion.getVersion(), model, validator);
 		history.getVersions().add(historyVersion);
@@ -153,22 +134,21 @@ public class HistoryModelGenerator {
 		}
 	}
 	
-	private static Matching generateMatching(Version versionA, Version versionB, DifferenceSettings settings) 
-			throws InvalidModelException, NoCorrespondencesException {
+	private static Difference generateMatching(Version versionA, Version versionB, DifferenceSettings settings) {
 		
 		Resource resourceA = versionA.getModel();
 		Resource resourceB = versionB.getModel();
 		
-		Matching matching = MatchingFacade.match(Arrays.asList(resourceA, resourceB), settings);
+		Difference matching = DifferenceFacade.match(resourceA, resourceB, settings);
 
 		return matching;
 	}
 	
-	private static void generateUUIDs(Matching matching) {
+	private static void generateUUIDs(Difference matching) {
 		for (Correspondence correspondence : matching.getCorrespondences()) {
 			if (!UUIDResource.isDynamic(correspondence.getMatchedA()) && !UUIDResource.isDynamic(correspondence.getMatchedB())) {
-				String uuid = EMFUtil.getXmiId(correspondence.getMatchedA());
-				EMFUtil.setXmiId(correspondence.getMatchedB(), uuid);
+				String uuid = EMFStorage.getXmiId(correspondence.getMatchedA());
+				EMFStorage.setXmiId(correspondence.getMatchedB(), uuid);
 			}
 		}
 	}

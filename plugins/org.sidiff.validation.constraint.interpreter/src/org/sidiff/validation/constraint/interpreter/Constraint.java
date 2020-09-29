@@ -2,14 +2,14 @@ package org.sidiff.validation.constraint.interpreter;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.sidiff.validation.constraint.interpreter.decisiontree.Alternative;
-import org.sidiff.validation.constraint.interpreter.decisiontree.IDecisionBranch;
-import org.sidiff.validation.constraint.interpreter.decisiontree.Sequence;
-import org.sidiff.validation.constraint.interpreter.formulas.binary.Formula;
-import org.sidiff.validation.constraint.interpreter.repair.RepairAction;
-import org.sidiff.validation.constraint.interpreter.repair.RepairAction.RepairType;
-import org.sidiff.validation.constraint.interpreter.scope.IScopeRecorder;
-import org.sidiff.validation.constraint.interpreter.scope.ScopeNode;
+import org.sidiff.revision.impact.changetree.IDecisionBranch;
+import org.sidiff.revision.impact.changetree.Sequence;
+import org.sidiff.revision.impact.changetree.change.ChangeActionFactory;
+import org.sidiff.revision.impact.changetree.change.ChangeTree;
+import org.sidiff.revision.impact.changetree.change.actions.ChangeAction.RepairType;
+import org.sidiff.revision.impact.changetree.scope.IScopeRecorder;
+import org.sidiff.revision.impact.changetree.scope.ScopeNode;
+import org.sidiff.validation.constraint.interpreter.formulas.Formula;
 import org.sidiff.validation.constraint.interpreter.terms.Variable;
 
 public class Constraint extends NamedElement implements IConstraint {
@@ -57,33 +57,22 @@ public class Constraint extends NamedElement implements IConstraint {
 	@Override
 	public IDecisionBranch repair() {
 		formula.evaluate(IScopeRecorder.DUMMY, false);
+		ChangeTree changeTree = new ChangeTree();
 		
 		if (getResult() != true) {
-			IDecisionBranch repairTree = createRootRepairDecision();
-			formula.repair(repairTree, true);
-			return repairTree;
-		} else {
-			return new Alternative();
-		}
-	}
-	
-	protected IDecisionBranch createRootRepairDecision() {
-		IDecisionBranch repairTreeRoot = new Alternative();
-		
-		// Repair which deletes the root element:
-		if (getContext().eContainmentFeature() != null) {
-			if (getContext().eContainmentFeature().getEOpposite() != null) {
-				// Use container reference:
-				repairTreeRoot.appendChildDecisions(new RepairAction(
-						RepairType.DELETE, getContext(),  getContext().eContainmentFeature().getEOpposite()));
-			} else {
-				// Use containment reference (as cross-reference):
-				repairTreeRoot.appendChildDecisions(new RepairAction(
-						RepairType.DELETE, getContext(),  getContext().eContainmentFeature()));
-			}
+			
+			// Repair which deletes the root element:
+			changeTree.appendChildDecisions(ChangeActionFactory.getInstance().create(
+					RepairType.DELETE, 
+					getContext().eContainmentFeature(),
+					getContext().eClass(),
+					getContext()));
+			
+			formula.repair(changeTree, true);
+			return changeTree;
 		}
 		
-		return repairTreeRoot;
+		return changeTree;
 	}
 	
 	@Override

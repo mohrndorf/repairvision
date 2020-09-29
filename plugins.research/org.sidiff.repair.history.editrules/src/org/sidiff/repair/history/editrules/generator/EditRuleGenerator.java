@@ -9,25 +9,20 @@ import java.util.NoSuchElementException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.sidiff.common.emf.exceptions.InvalidModelException;
-import org.sidiff.common.emf.exceptions.NoCorrespondencesException;
-import org.sidiff.consistency.common.emf.DocumentType;
-import org.sidiff.correspondences.CorrespondencesUtil;
-import org.sidiff.correspondences.matchingmodel.MatchingModelCorrespondences;
-import org.sidiff.difference.symmetric.Change;
-import org.sidiff.difference.symmetric.SymmetricDifference;
-import org.sidiff.difference.technical.api.TechnicalDifferenceFacade;
-import org.sidiff.difference.technical.api.settings.DifferenceSettings;
-import org.sidiff.difference.technical.api.util.TechnicalDifferenceUtils;
-import org.sidiff.matching.api.util.MatchingUtils;
 import org.sidiff.repair.history.editrules.learn.scope.LearnEditRule;
 import org.sidiff.repair.history.editrules.util.IterableHistory;
+import org.sidiff.revision.difference.Change;
+import org.sidiff.revision.difference.Difference;
+import org.sidiff.revision.difference.api.DifferenceFacade;
+import org.sidiff.revision.difference.api.registry.DifferenceBuilderRegistry;
+import org.sidiff.revision.difference.api.registry.MatcherRegistry;
+import org.sidiff.revision.difference.api.settings.DifferenceSettings;
+import org.sidiff.revision.impact.changetree.IDecisionNode;
+import org.sidiff.revision.impact.changetree.scope.IScopeRecorder;
+import org.sidiff.revision.impact.changetree.scope.ScopeNode;
+import org.sidiff.revision.impact.changetree.scope.ScopeRecorder;
 import org.sidiff.validation.constraint.api.ValidationFacade;
 import org.sidiff.validation.constraint.api.util.RequiredValidation;
-import org.sidiff.validation.constraint.interpreter.decisiontree.IDecisionNode;
-import org.sidiff.validation.constraint.interpreter.scope.IScopeRecorder;
-import org.sidiff.validation.constraint.interpreter.scope.ScopeNode;
-import org.sidiff.validation.constraint.interpreter.scope.ScopeRecorder;
 
 public class EditRuleGenerator {
 	
@@ -68,45 +63,37 @@ public class EditRuleGenerator {
 			if (monitor.isCanceled()) {
 				break;
 			}
-			
+
 			Resource vA = history[0];
 			Resource vB = history[1];
-			
-			try {
-				
-				// Calculate difference:
-				DifferenceSettings diffSettings =  new DifferenceSettings(
-						Collections.singleton(DocumentType.getDocumentType(vA)));
-//				diffSettings.setTechBuilder(TechnicalDifferenceUtils.getGenericTechnicalDifferenceBuilder());
-				diffSettings.setTechBuilder(TechnicalDifferenceUtils.getTechnicalDifferenceBuilder(
-						"org.sidiff.ecore.difference.technical.TechnicalDifferenceBuilderEcore"));
-				diffSettings.setMatcher(MatchingUtils.getMatcherByKey(
-						"EMFCompareMatcherAdapter"));
-				diffSettings.setCorrespondencesService(CorrespondencesUtil.getAvailableCorrespondencesService(
-						MatchingModelCorrespondences.SERVICE_ID));
-				
-				SymmetricDifference difference = TechnicalDifferenceFacade.deriveTechnicalDifference(
-						vA, vB, diffSettings);
-				
-				// Validation:
-				List<RequiredValidation[]> validationPairs = findValidationPairs(difference);
-				
-				// Learn edit-rules:
-				for (RequiredValidation[] validationPair : validationPairs) {
-					List<EditRule> editRules = calculateEditRules(difference, validationPair);
-					
-//					System.out.println();
-//					System.out.println("## " + validationPair[0].getRule().getName() + " ##");
-//					System.out.println(validationPair[0].getRequiredTree());
-//					System.out.println();
-//					System.out.println(validationPair[1].getRequiredTree());
-					
-					for (EditRule editRule : editRules) {
-						integrateIntoRulebase(editRule );
-					}
+
+
+			// Calculate difference:
+			DifferenceSettings diffSettings =  new DifferenceSettings();
+			//				diffSettings.setTechBuilder(TechnicalDifferenceUtils.getGenericTechnicalDifferenceBuilder());
+			diffSettings.setTechBuilder(DifferenceBuilderRegistry.getTechnicalDifferenceBuilder(
+					"org.sidiff.ecore.difference.technical.TechnicalDifferenceBuilderEcore"));
+			diffSettings.setMatcher(MatcherRegistry.getMatcherByKey(
+					"EMFCompareMatcherAdapter"));
+
+			Difference difference = DifferenceFacade.difference(vA, vB, diffSettings);
+
+			// Validation:
+			List<RequiredValidation[]> validationPairs = findValidationPairs(difference);
+
+			// Learn edit-rules:
+			for (RequiredValidation[] validationPair : validationPairs) {
+				List<EditRule> editRules = calculateEditRules(difference, validationPair);
+
+				//					System.out.println();
+				//					System.out.println("## " + validationPair[0].getRule().getName() + " ##");
+				//					System.out.println(validationPair[0].getRequiredTree());
+				//					System.out.println();
+				//					System.out.println(validationPair[1].getRequiredTree());
+
+				for (EditRule editRule : editRules) {
+					integrateIntoRulebase(editRule );
 				}
-			} catch (InvalidModelException | NoCorrespondencesException e) {
-				e.printStackTrace();
 			}
 			
 			monitor.worked(1);
@@ -119,8 +106,7 @@ public class EditRuleGenerator {
 		}
 	}
 	
-	protected List<RequiredValidation[]> findValidationPairs(SymmetricDifference difference) 
-			throws InvalidModelException, NoCorrespondencesException {
+	protected List<RequiredValidation[]> findValidationPairs(Difference difference) {
 		
 		System.out.println("================================================================================");
 		System.out.println("=============================== ANALYZE HISTORY ================================");
@@ -178,7 +164,7 @@ public class EditRuleGenerator {
 		return validations;
 	}
 	
-	protected List<EditRule> calculateEditRules(SymmetricDifference difference, RequiredValidation[] validationPair) {
+	protected List<EditRule> calculateEditRules(Difference difference, RequiredValidation[] validationPair) {
 		List<EditRule> editRules = new ArrayList<>();
 
 		// Consistency-Tree to Consistency-Fragments:
@@ -303,7 +289,7 @@ public class EditRuleGenerator {
 		System.out.println();
 		System.out.println(editRule.getFragmentB());
 
-		editRule.saveEditRule(LearnEditRule.generateURI(project + "/" + folder, editRule.getName()), false);
+		editRule.saveEditRule(LearnEditRule.getFolder(project + "/" + folder) , editRule.getName(), false);
 	}
 	
 	@Override

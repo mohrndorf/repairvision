@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.sidiff.graphpattern.EdgePattern;
 import org.sidiff.graphpattern.GraphpatternPackage;
 import org.sidiff.graphpattern.NodePattern;
+import org.sidiff.graphpattern.Stereotype;
 
 /**
  * <!-- begin-user-doc -->
@@ -87,6 +88,7 @@ public class EdgePatternImpl extends GraphElementImpl implements EdgePattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NodePattern getTarget() {
 		if (target != null && target.eIsProxy()) {
 			InternalEObject oldTarget = (InternalEObject)target;
@@ -128,6 +130,7 @@ public class EdgePatternImpl extends GraphElementImpl implements EdgePattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTarget(NodePattern newTarget) {
 		if (newTarget != target) {
 			NotificationChain msgs = null;
@@ -147,6 +150,7 @@ public class EdgePatternImpl extends GraphElementImpl implements EdgePattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NodePattern getSource() {
 		if (eContainerFeatureID() != GraphpatternPackage.EDGE_PATTERN__SOURCE) return null;
 		return (NodePattern)eInternalContainer();
@@ -167,6 +171,7 @@ public class EdgePatternImpl extends GraphElementImpl implements EdgePattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSource(NodePattern newSource) {
 		if (newSource != eInternalContainer() || (eContainerFeatureID() != GraphpatternPackage.EDGE_PATTERN__SOURCE && newSource != null)) {
 			if (EcoreUtil.isAncestor(this, newSource))
@@ -188,6 +193,7 @@ public class EdgePatternImpl extends GraphElementImpl implements EdgePattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EdgePattern getOpposite() {
 		if (opposite != null && opposite.eIsProxy()) {
 			InternalEObject oldOpposite = (InternalEObject)opposite;
@@ -214,6 +220,7 @@ public class EdgePatternImpl extends GraphElementImpl implements EdgePattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOpposite(EdgePattern newOpposite) {
 		EdgePattern oldOpposite = opposite;
 		opposite = newOpposite;
@@ -226,6 +233,7 @@ public class EdgePatternImpl extends GraphElementImpl implements EdgePattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject)type;
@@ -252,6 +260,7 @@ public class EdgePatternImpl extends GraphElementImpl implements EdgePattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(EReference newType) {
 		EReference oldType = type;
 		type = newType;
@@ -410,7 +419,19 @@ public class EdgePatternImpl extends GraphElementImpl implements EdgePattern {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
+		
+		// Stereotypes:
+		String edgeStereotype = "";
+		
+		for (Stereotype stereotype : getStereotypes()) {
+			edgeStereotype += stereotype.getName() + ","; 
+		}
+		
+		if (edgeStereotype != "") {
+			edgeStereotype = "<<" + edgeStereotype.substring(0, edgeStereotype.length() - 1) + ">> ";
+		}
 	
+		// Path:
 		String sourceName = getSource() != null ? getSource().getName() != null ? getSource().getName() : "" : "";
 		String sourceType = getSource() != null ? getSource().getType() != null ? getSource().getType().getName() : "?" : "?";
 		String targetName = getTarget() != null ? getTarget().getName() != null ? getTarget().getName() : "" : "";
@@ -419,6 +440,7 @@ public class EdgePatternImpl extends GraphElementImpl implements EdgePattern {
 		String edgeType = getType() != null ? getType().getName() : "?";
 		
 		result.append(" (path: " 
+				+ edgeStereotype
 				+ "[" + sourceName+ ":" + sourceType + "]"
 				+ " - " + edgeType + " -> " 
 				+ "[" + targetName + ":" + targetType + "]" 

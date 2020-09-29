@@ -2,6 +2,7 @@
  */
 package org.sidiff.graphpattern.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -94,6 +95,7 @@ public class GraphPatternImpl extends PatternElementImpl implements GraphPattern
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<NodePattern> getNodes() {
 		if (nodes == null) {
 			nodes = new EObjectContainmentEList<NodePattern>(NodePattern.class, this, GraphpatternPackage.GRAPH_PATTERN__NODES);
@@ -106,6 +108,7 @@ public class GraphPatternImpl extends PatternElementImpl implements GraphPattern
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Pattern getPattern() {
 		if (eContainerFeatureID() != GraphpatternPackage.GRAPH_PATTERN__PATTERN) return null;
 		return (Pattern)eInternalContainer();
@@ -126,6 +129,7 @@ public class GraphPatternImpl extends PatternElementImpl implements GraphPattern
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPattern(Pattern newPattern) {
 		if (newPattern != eInternalContainer() || (eContainerFeatureID() != GraphpatternPackage.GRAPH_PATTERN__PATTERN && newPattern != null)) {
 			if (EcoreUtil.isAncestor(this, newPattern))
@@ -147,6 +151,7 @@ public class GraphPatternImpl extends PatternElementImpl implements GraphPattern
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DependencyGraph getDependencyGraph() {
 		return dependencyGraph;
 	}
@@ -171,6 +176,7 @@ public class GraphPatternImpl extends PatternElementImpl implements GraphPattern
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDependencyGraph(DependencyGraph newDependencyGraph) {
 		if (newDependencyGraph != dependencyGraph) {
 			NotificationChain msgs = null;
@@ -190,11 +196,29 @@ public class GraphPatternImpl extends PatternElementImpl implements GraphPattern
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<SubGraph> getSubgraphs() {
 		if (subgraphs == null) {
 			subgraphs = new EObjectContainmentEList<SubGraph>(SubGraph.class, this, GraphpatternPackage.GRAPH_PATTERN__SUBGRAPHS);
 		}
 		return subgraphs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public NodePattern getNode(String name) {
+		
+		for (NodePattern node : getNodes()) {
+			if (node.getName().equals(name)) {
+				return node;
+			}
+		}
+		
+		return null;
 	}
 
 	/**
@@ -340,6 +364,20 @@ public class GraphPatternImpl extends PatternElementImpl implements GraphPattern
 				return subgraphs != null && !subgraphs.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case GraphpatternPackage.GRAPH_PATTERN___GET_NODE__STRING:
+				return getNode((String)arguments.get(0));
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

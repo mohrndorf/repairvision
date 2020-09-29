@@ -23,6 +23,8 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-user-doc -->
  * @see org.sidiff.graphpattern.GraphpatternFactory
  * @model kind="package"
+ *        annotation="http://www.eclipse.org/OCL/Import ecore='http://www.eclipse.org/emf/2002/Ecore'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore invocationDelegates='http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot' settingDelegates='http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot' validationDelegates='http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot'"
  * @generated
  */
 public interface GraphpatternPackage extends EPackage {
@@ -413,13 +415,22 @@ public interface GraphpatternPackage extends EPackage {
 	int GRAPH_PATTERN_FEATURE_COUNT = PATTERN_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
+	 * The operation id for the '<em>Get Node</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPH_PATTERN___GET_NODE__STRING = PATTERN_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Graph Pattern</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GRAPH_PATTERN_OPERATION_COUNT = PATTERN_ELEMENT_OPERATION_COUNT + 0;
+	int GRAPH_PATTERN_OPERATION_COUNT = PATTERN_ELEMENT_OPERATION_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -449,13 +460,13 @@ public interface GraphpatternPackage extends EPackage {
 	int GRAPH_ELEMENT__DESCRIPTION = PATTERN_ELEMENT__DESCRIPTION;
 
 	/**
-	 * The feature id for the '<em><b>Subgraph</b></em>' reference.
+	 * The feature id for the '<em><b>Subgraphs</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GRAPH_ELEMENT__SUBGRAPH = PATTERN_ELEMENT_FEATURE_COUNT + 0;
+	int GRAPH_ELEMENT__SUBGRAPHS = PATTERN_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Graph</b></em>' reference.
@@ -512,13 +523,13 @@ public interface GraphpatternPackage extends EPackage {
 	int NODE_PATTERN__DESCRIPTION = GRAPH_ELEMENT__DESCRIPTION;
 
 	/**
-	 * The feature id for the '<em><b>Subgraph</b></em>' reference.
+	 * The feature id for the '<em><b>Subgraphs</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_PATTERN__SUBGRAPH = GRAPH_ELEMENT__SUBGRAPH;
+	int NODE_PATTERN__SUBGRAPHS = GRAPH_ELEMENT__SUBGRAPHS;
 
 	/**
 	 * The feature id for the '<em><b>Graph</b></em>' reference.
@@ -602,22 +613,40 @@ public interface GraphpatternPackage extends EPackage {
 	int NODE_PATTERN___GET_ATTRIBUTE__EATTRIBUTE = GRAPH_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Get Outgoing</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NODE_PATTERN___GET_OUTGOING__EREFERENCE = GRAPH_ELEMENT_OPERATION_COUNT + 1;
-
-	/**
 	 * The operation id for the '<em>Get Outgoings</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_PATTERN___GET_OUTGOINGS__EREFERENCE = GRAPH_ELEMENT_OPERATION_COUNT + 2;
+	int NODE_PATTERN___GET_OUTGOINGS__EREFERENCE = GRAPH_ELEMENT_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Get Outgoing</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE_PATTERN___GET_OUTGOING__EREFERENCE = GRAPH_ELEMENT_OPERATION_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Get Outgoing</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE_PATTERN___GET_OUTGOING__EREFERENCE_NODEPATTERN = GRAPH_ELEMENT_OPERATION_COUNT + 3;
+
+	/**
+	 * The operation id for the '<em>Get Outgoing</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE_PATTERN___GET_OUTGOING__EREFERENCE_NODEPATTERN_STEREOTYPE = GRAPH_ELEMENT_OPERATION_COUNT + 4;
 
 	/**
 	 * The operation id for the '<em>Get Incoming</em>' operation.
@@ -626,7 +655,7 @@ public interface GraphpatternPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_PATTERN___GET_INCOMING__EREFERENCE = GRAPH_ELEMENT_OPERATION_COUNT + 3;
+	int NODE_PATTERN___GET_INCOMING__EREFERENCE = GRAPH_ELEMENT_OPERATION_COUNT + 5;
 
 	/**
 	 * The operation id for the '<em>Get Incomings</em>' operation.
@@ -635,7 +664,7 @@ public interface GraphpatternPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_PATTERN___GET_INCOMINGS__EREFERENCE = GRAPH_ELEMENT_OPERATION_COUNT + 4;
+	int NODE_PATTERN___GET_INCOMINGS__EREFERENCE = GRAPH_ELEMENT_OPERATION_COUNT + 6;
 
 	/**
 	 * The operation id for the '<em>Get Incident</em>' operation.
@@ -644,7 +673,7 @@ public interface GraphpatternPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_PATTERN___GET_INCIDENT = GRAPH_ELEMENT_OPERATION_COUNT + 5;
+	int NODE_PATTERN___GET_INCIDENT = GRAPH_ELEMENT_OPERATION_COUNT + 7;
 
 	/**
 	 * The operation id for the '<em>Get Incident</em>' operation.
@@ -653,7 +682,7 @@ public interface GraphpatternPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_PATTERN___GET_INCIDENT__NODEPATTERN = GRAPH_ELEMENT_OPERATION_COUNT + 6;
+	int NODE_PATTERN___GET_INCIDENT__NODEPATTERN = GRAPH_ELEMENT_OPERATION_COUNT + 8;
 
 	/**
 	 * The operation id for the '<em>Remove Incident</em>' operation.
@@ -662,7 +691,7 @@ public interface GraphpatternPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_PATTERN___REMOVE_INCIDENT = GRAPH_ELEMENT_OPERATION_COUNT + 7;
+	int NODE_PATTERN___REMOVE_INCIDENT = GRAPH_ELEMENT_OPERATION_COUNT + 9;
 
 	/**
 	 * The operation id for the '<em>Remove Incident</em>' operation.
@@ -671,7 +700,7 @@ public interface GraphpatternPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_PATTERN___REMOVE_INCIDENT__NODEPATTERN = GRAPH_ELEMENT_OPERATION_COUNT + 8;
+	int NODE_PATTERN___REMOVE_INCIDENT__NODEPATTERN = GRAPH_ELEMENT_OPERATION_COUNT + 10;
 
 	/**
 	 * The operation id for the '<em>Get Adjacent</em>' operation.
@@ -680,7 +709,7 @@ public interface GraphpatternPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_PATTERN___GET_ADJACENT = GRAPH_ELEMENT_OPERATION_COUNT + 9;
+	int NODE_PATTERN___GET_ADJACENT = GRAPH_ELEMENT_OPERATION_COUNT + 11;
 
 	/**
 	 * The number of operations of the '<em>Node Pattern</em>' class.
@@ -689,7 +718,7 @@ public interface GraphpatternPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_PATTERN_OPERATION_COUNT = GRAPH_ELEMENT_OPERATION_COUNT + 10;
+	int NODE_PATTERN_OPERATION_COUNT = GRAPH_ELEMENT_OPERATION_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -719,13 +748,13 @@ public interface GraphpatternPackage extends EPackage {
 	int EDGE_PATTERN__DESCRIPTION = GRAPH_ELEMENT__DESCRIPTION;
 
 	/**
-	 * The feature id for the '<em><b>Subgraph</b></em>' reference.
+	 * The feature id for the '<em><b>Subgraphs</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EDGE_PATTERN__SUBGRAPH = GRAPH_ELEMENT__SUBGRAPH;
+	int EDGE_PATTERN__SUBGRAPHS = GRAPH_ELEMENT__SUBGRAPHS;
 
 	/**
 	 * The feature id for the '<em><b>Graph</b></em>' reference.
@@ -818,13 +847,13 @@ public interface GraphpatternPackage extends EPackage {
 	int ATTRIBUTE_PATTERN__DESCRIPTION = GRAPH_ELEMENT__DESCRIPTION;
 
 	/**
-	 * The feature id for the '<em><b>Subgraph</b></em>' reference.
+	 * The feature id for the '<em><b>Subgraphs</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_PATTERN__SUBGRAPH = GRAPH_ELEMENT__SUBGRAPH;
+	int ATTRIBUTE_PATTERN__SUBGRAPHS = GRAPH_ELEMENT__SUBGRAPHS;
 
 	/**
 	 * The feature id for the '<em><b>Graph</b></em>' reference.
@@ -863,13 +892,58 @@ public interface GraphpatternPackage extends EPackage {
 	int ATTRIBUTE_PATTERN__NODE = GRAPH_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Constant</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_PATTERN__CONSTANT = GRAPH_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Variables</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_PATTERN__VARIABLES = GRAPH_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Attribute Pattern</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_PATTERN_FEATURE_COUNT = GRAPH_ELEMENT_FEATURE_COUNT + 3;
+	int ATTRIBUTE_PATTERN_FEATURE_COUNT = GRAPH_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The operation id for the '<em>Is Constant</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_PATTERN___IS_CONSTANT = GRAPH_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Is Variable</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_PATTERN___IS_VARIABLE = GRAPH_ELEMENT_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Is Expression</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_PATTERN___IS_EXPRESSION = GRAPH_ELEMENT_OPERATION_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Attribute Pattern</em>' class.
@@ -878,7 +952,7 @@ public interface GraphpatternPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_PATTERN_OPERATION_COUNT = GRAPH_ELEMENT_OPERATION_COUNT + 0;
+	int ATTRIBUTE_PATTERN_OPERATION_COUNT = GRAPH_ELEMENT_OPERATION_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Matches</b></em>' reference list.
@@ -986,78 +1060,6 @@ public interface GraphpatternPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BUNDLE__STEREOTYPES = PATTERN_ELEMENT__STEREOTYPES;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BUNDLE__NAME = PATTERN_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BUNDLE__DESCRIPTION = PATTERN_ELEMENT__DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>Patterns</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BUNDLE__PATTERNS = PATTERN_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Profiles</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BUNDLE__PROFILES = PATTERN_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Domains</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BUNDLE__DOMAINS = PATTERN_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Bundle</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BUNDLE_FEATURE_COUNT = PATTERN_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The number of operations of the '<em>Bundle</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BUNDLE_OPERATION_COUNT = PATTERN_ELEMENT_OPERATION_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
 	int PATTERN__STEREOTYPES = PATTERN_ELEMENT__STEREOTYPES;
 
 	/**
@@ -1115,13 +1117,13 @@ public interface GraphpatternPackage extends EPackage {
 	int PATTERN__BUNDLE = PATTERN_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Subpatterns</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Patterns</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PATTERN__SUBPATTERNS = PATTERN_ELEMENT_FEATURE_COUNT + 4;
+	int PATTERN__PATTERNS = PATTERN_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Pattern</em>' class.
@@ -1133,13 +1135,40 @@ public interface GraphpatternPackage extends EPackage {
 	int PATTERN_FEATURE_COUNT = PATTERN_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
+	 * The operation id for the '<em>Get Pattern</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATTERN___GET_PATTERN__STRING = PATTERN_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Get Parameter</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATTERN___GET_PARAMETER__STRING = PATTERN_ELEMENT_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Get Graph</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATTERN___GET_GRAPH__STRING = PATTERN_ELEMENT_OPERATION_COUNT + 2;
+
+	/**
 	 * The operation id for the '<em>Get All Graph Patterns</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PATTERN___GET_ALL_GRAPH_PATTERNS = PATTERN_ELEMENT_OPERATION_COUNT + 0;
+	int PATTERN___GET_ALL_GRAPH_PATTERNS = PATTERN_ELEMENT_OPERATION_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Pattern</em>' class.
@@ -1148,7 +1177,151 @@ public interface GraphpatternPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PATTERN_OPERATION_COUNT = PATTERN_ELEMENT_OPERATION_COUNT + 1;
+	int PATTERN_OPERATION_COUNT = PATTERN_ELEMENT_OPERATION_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUNDLE__STEREOTYPES = PATTERN__STEREOTYPES;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUNDLE__NAME = PATTERN__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUNDLE__DESCRIPTION = PATTERN__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Graphs</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUNDLE__GRAPHS = PATTERN__GRAPHS;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUNDLE__PARAMETERS = PATTERN__PARAMETERS;
+
+	/**
+	 * The feature id for the '<em><b>Assignments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUNDLE__ASSIGNMENTS = PATTERN__ASSIGNMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Bundle</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUNDLE__BUNDLE = PATTERN__BUNDLE;
+
+	/**
+	 * The feature id for the '<em><b>Patterns</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUNDLE__PATTERNS = PATTERN__PATTERNS;
+
+	/**
+	 * The feature id for the '<em><b>Profiles</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUNDLE__PROFILES = PATTERN_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Domains</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUNDLE__DOMAINS = PATTERN_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Bundle</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUNDLE_FEATURE_COUNT = PATTERN_FEATURE_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Get Pattern</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUNDLE___GET_PATTERN__STRING = PATTERN___GET_PATTERN__STRING;
+
+	/**
+	 * The operation id for the '<em>Get Parameter</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUNDLE___GET_PARAMETER__STRING = PATTERN___GET_PARAMETER__STRING;
+
+	/**
+	 * The operation id for the '<em>Get Graph</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUNDLE___GET_GRAPH__STRING = PATTERN___GET_GRAPH__STRING;
+
+	/**
+	 * The operation id for the '<em>Get All Graph Patterns</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUNDLE___GET_ALL_GRAPH_PATTERNS = PATTERN___GET_ALL_GRAPH_PATTERNS;
+
+	/**
+	 * The number of operations of the '<em>Bundle</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUNDLE_OPERATION_COUNT = PATTERN_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Stereotypes</b></em>' reference list.
@@ -1857,6 +2030,16 @@ public interface GraphpatternPackage extends EPackage {
 	EReference getGraphPattern_Subgraphs();
 
 	/**
+	 * Returns the meta object for the '{@link org.sidiff.graphpattern.GraphPattern#getNode(java.lang.String) <em>Get Node</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Node</em>' operation.
+	 * @see org.sidiff.graphpattern.GraphPattern#getNode(java.lang.String)
+	 * @generated
+	 */
+	EOperation getGraphPattern__GetNode__String();
+
+	/**
 	 * Returns the meta object for class '{@link org.sidiff.graphpattern.NodePattern <em>Node Pattern</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1951,6 +2134,26 @@ public interface GraphpatternPackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getNodePattern__GetOutgoing__EReference();
+
+	/**
+	 * Returns the meta object for the '{@link org.sidiff.graphpattern.NodePattern#getOutgoing(org.eclipse.emf.ecore.EReference, org.sidiff.graphpattern.NodePattern) <em>Get Outgoing</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Outgoing</em>' operation.
+	 * @see org.sidiff.graphpattern.NodePattern#getOutgoing(org.eclipse.emf.ecore.EReference, org.sidiff.graphpattern.NodePattern)
+	 * @generated
+	 */
+	EOperation getNodePattern__GetOutgoing__EReference_NodePattern();
+
+	/**
+	 * Returns the meta object for the '{@link org.sidiff.graphpattern.NodePattern#getOutgoing(org.eclipse.emf.ecore.EReference, org.sidiff.graphpattern.NodePattern, org.sidiff.graphpattern.Stereotype) <em>Get Outgoing</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Outgoing</em>' operation.
+	 * @see org.sidiff.graphpattern.NodePattern#getOutgoing(org.eclipse.emf.ecore.EReference, org.sidiff.graphpattern.NodePattern, org.sidiff.graphpattern.Stereotype)
+	 * @generated
+	 */
+	EOperation getNodePattern__GetOutgoing__EReference_NodePattern_Stereotype();
 
 	/**
 	 * Returns the meta object for the '{@link org.sidiff.graphpattern.NodePattern#getOutgoings(org.eclipse.emf.ecore.EReference) <em>Get Outgoings</em>}' operation.
@@ -2130,6 +2333,58 @@ public interface GraphpatternPackage extends EPackage {
 	EReference getAttributePattern_Node();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.sidiff.graphpattern.AttributePattern#getConstant <em>Constant</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Constant</em>'.
+	 * @see org.sidiff.graphpattern.AttributePattern#getConstant()
+	 * @see #getAttributePattern()
+	 * @generated
+	 */
+	EAttribute getAttributePattern_Constant();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.sidiff.graphpattern.AttributePattern#getVariables <em>Variables</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Variables</em>'.
+	 * @see org.sidiff.graphpattern.AttributePattern#getVariables()
+	 * @see #getAttributePattern()
+	 * @generated
+	 */
+	EAttribute getAttributePattern_Variables();
+
+	/**
+	 * Returns the meta object for the '{@link org.sidiff.graphpattern.AttributePattern#isVariable() <em>Is Variable</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Is Variable</em>' operation.
+	 * @see org.sidiff.graphpattern.AttributePattern#isVariable()
+	 * @generated
+	 */
+	EOperation getAttributePattern__IsVariable();
+
+	/**
+	 * Returns the meta object for the '{@link org.sidiff.graphpattern.AttributePattern#isConstant() <em>Is Constant</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Is Constant</em>' operation.
+	 * @see org.sidiff.graphpattern.AttributePattern#isConstant()
+	 * @generated
+	 */
+	EOperation getAttributePattern__IsConstant();
+
+	/**
+	 * Returns the meta object for the '{@link org.sidiff.graphpattern.AttributePattern#isExpression() <em>Is Expression</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Is Expression</em>' operation.
+	 * @see org.sidiff.graphpattern.AttributePattern#isExpression()
+	 * @generated
+	 */
+	EOperation getAttributePattern__IsExpression();
+
+	/**
 	 * Returns the meta object for class '{@link org.sidiff.graphpattern.Matching <em>Matching</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2240,17 +2495,6 @@ public interface GraphpatternPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getBundle();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.sidiff.graphpattern.Bundle#getPatterns <em>Patterns</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Patterns</em>'.
-	 * @see org.sidiff.graphpattern.Bundle#getPatterns()
-	 * @see #getBundle()
-	 * @generated
-	 */
-	EReference getBundle_Patterns();
 
 	/**
 	 * Returns the meta object for the reference list '{@link org.sidiff.graphpattern.Bundle#getProfiles <em>Profiles</em>}'.
@@ -2637,15 +2881,15 @@ public interface GraphpatternPackage extends EPackage {
 	EClass getGraphElement();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.sidiff.graphpattern.GraphElement#getSubgraph <em>Subgraph</em>}'.
+	 * Returns the meta object for the reference list '{@link org.sidiff.graphpattern.GraphElement#getSubgraphs <em>Subgraphs</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Subgraph</em>'.
-	 * @see org.sidiff.graphpattern.GraphElement#getSubgraph()
+	 * @return the meta object for the reference list '<em>Subgraphs</em>'.
+	 * @see org.sidiff.graphpattern.GraphElement#getSubgraphs()
 	 * @see #getGraphElement()
 	 * @generated
 	 */
-	EReference getGraphElement_Subgraph();
+	EReference getGraphElement_Subgraphs();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.sidiff.graphpattern.GraphElement#getGraph <em>Graph</em>}'.
@@ -2819,15 +3063,25 @@ public interface GraphpatternPackage extends EPackage {
 	EReference getPattern_Bundle();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.sidiff.graphpattern.Pattern#getSubpatterns <em>Subpatterns</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.sidiff.graphpattern.Pattern#getPatterns <em>Patterns</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Subpatterns</em>'.
-	 * @see org.sidiff.graphpattern.Pattern#getSubpatterns()
+	 * @return the meta object for the containment reference list '<em>Patterns</em>'.
+	 * @see org.sidiff.graphpattern.Pattern#getPatterns()
 	 * @see #getPattern()
 	 * @generated
 	 */
-	EReference getPattern_Subpatterns();
+	EReference getPattern_Patterns();
+
+	/**
+	 * Returns the meta object for the '{@link org.sidiff.graphpattern.Pattern#getPattern(java.lang.String) <em>Get Pattern</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Pattern</em>' operation.
+	 * @see org.sidiff.graphpattern.Pattern#getPattern(java.lang.String)
+	 * @generated
+	 */
+	EOperation getPattern__GetPattern__String();
 
 	/**
 	 * Returns the meta object for the '{@link org.sidiff.graphpattern.Pattern#getAllGraphPatterns() <em>Get All Graph Patterns</em>}' operation.
@@ -2838,6 +3092,26 @@ public interface GraphpatternPackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getPattern__GetAllGraphPatterns();
+
+	/**
+	 * Returns the meta object for the '{@link org.sidiff.graphpattern.Pattern#getGraph(java.lang.String) <em>Get Graph</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Graph</em>' operation.
+	 * @see org.sidiff.graphpattern.Pattern#getGraph(java.lang.String)
+	 * @generated
+	 */
+	EOperation getPattern__GetGraph__String();
+
+	/**
+	 * Returns the meta object for the '{@link org.sidiff.graphpattern.Pattern#getParameter(java.lang.String) <em>Get Parameter</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Parameter</em>' operation.
+	 * @see org.sidiff.graphpattern.Pattern#getParameter(java.lang.String)
+	 * @generated
+	 */
+	EOperation getPattern__GetParameter__String();
 
 	/**
 	 * Returns the meta object for class '{@link org.sidiff.graphpattern.PatternElement <em>Pattern Element</em>}'.
@@ -2969,6 +3243,14 @@ public interface GraphpatternPackage extends EPackage {
 		EReference GRAPH_PATTERN__SUBGRAPHS = eINSTANCE.getGraphPattern_Subgraphs();
 
 		/**
+		 * The meta object literal for the '<em><b>Get Node</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation GRAPH_PATTERN___GET_NODE__STRING = eINSTANCE.getGraphPattern__GetNode__String();
+
+		/**
 		 * The meta object literal for the '{@link org.sidiff.graphpattern.impl.NodePatternImpl <em>Node Pattern</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3041,6 +3323,22 @@ public interface GraphpatternPackage extends EPackage {
 		 * @generated
 		 */
 		EOperation NODE_PATTERN___GET_OUTGOING__EREFERENCE = eINSTANCE.getNodePattern__GetOutgoing__EReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Outgoing</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation NODE_PATTERN___GET_OUTGOING__EREFERENCE_NODEPATTERN = eINSTANCE.getNodePattern__GetOutgoing__EReference_NodePattern();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Outgoing</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation NODE_PATTERN___GET_OUTGOING__EREFERENCE_NODEPATTERN_STEREOTYPE = eINSTANCE.getNodePattern__GetOutgoing__EReference_NodePattern_Stereotype();
 
 		/**
 		 * The meta object literal for the '<em><b>Get Outgoings</b></em>' operation.
@@ -3183,6 +3481,46 @@ public interface GraphpatternPackage extends EPackage {
 		EReference ATTRIBUTE_PATTERN__NODE = eINSTANCE.getAttributePattern_Node();
 
 		/**
+		 * The meta object literal for the '<em><b>Constant</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ATTRIBUTE_PATTERN__CONSTANT = eINSTANCE.getAttributePattern_Constant();
+
+		/**
+		 * The meta object literal for the '<em><b>Variables</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ATTRIBUTE_PATTERN__VARIABLES = eINSTANCE.getAttributePattern_Variables();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Variable</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ATTRIBUTE_PATTERN___IS_VARIABLE = eINSTANCE.getAttributePattern__IsVariable();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Constant</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ATTRIBUTE_PATTERN___IS_CONSTANT = eINSTANCE.getAttributePattern__IsConstant();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Expression</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ATTRIBUTE_PATTERN___IS_EXPRESSION = eINSTANCE.getAttributePattern__IsExpression();
+
+		/**
 		 * The meta object literal for the '{@link org.sidiff.graphpattern.impl.MatchingImpl <em>Matching</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3273,14 +3611,6 @@ public interface GraphpatternPackage extends EPackage {
 		 * @generated
 		 */
 		EClass BUNDLE = eINSTANCE.getBundle();
-
-		/**
-		 * The meta object literal for the '<em><b>Patterns</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BUNDLE__PATTERNS = eINSTANCE.getBundle_Patterns();
 
 		/**
 		 * The meta object literal for the '<em><b>Profiles</b></em>' reference list feature.
@@ -3595,12 +3925,12 @@ public interface GraphpatternPackage extends EPackage {
 		EClass GRAPH_ELEMENT = eINSTANCE.getGraphElement();
 
 		/**
-		 * The meta object literal for the '<em><b>Subgraph</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Subgraphs</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference GRAPH_ELEMENT__SUBGRAPH = eINSTANCE.getGraphElement_Subgraph();
+		EReference GRAPH_ELEMENT__SUBGRAPHS = eINSTANCE.getGraphElement_Subgraphs();
 
 		/**
 		 * The meta object literal for the '<em><b>Graph</b></em>' reference feature.
@@ -3739,12 +4069,20 @@ public interface GraphpatternPackage extends EPackage {
 		EReference PATTERN__BUNDLE = eINSTANCE.getPattern_Bundle();
 
 		/**
-		 * The meta object literal for the '<em><b>Subpatterns</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Patterns</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PATTERN__SUBPATTERNS = eINSTANCE.getPattern_Subpatterns();
+		EReference PATTERN__PATTERNS = eINSTANCE.getPattern_Patterns();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Pattern</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PATTERN___GET_PATTERN__STRING = eINSTANCE.getPattern__GetPattern__String();
 
 		/**
 		 * The meta object literal for the '<em><b>Get All Graph Patterns</b></em>' operation.
@@ -3753,6 +4091,22 @@ public interface GraphpatternPackage extends EPackage {
 		 * @generated
 		 */
 		EOperation PATTERN___GET_ALL_GRAPH_PATTERNS = eINSTANCE.getPattern__GetAllGraphPatterns();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Graph</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PATTERN___GET_GRAPH__STRING = eINSTANCE.getPattern__GetGraph__String();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Parameter</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PATTERN___GET_PARAMETER__STRING = eINSTANCE.getPattern__GetParameter__String();
 
 		/**
 		 * The meta object literal for the '{@link org.sidiff.graphpattern.impl.PatternElementImpl <em>Pattern Element</em>}' class.

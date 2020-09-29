@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="changes" nsURI="http://www.sidiff.org/changes/1.0" nsPrefix="changes">
+  <eClassifiers xsi:type="ecore:EClass" name="Change" abstract="true" interface="true">
+    <eOperations name="getAction"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NodeChange" abstract="true" interface="true"
+      eSuperTypes="#//Change">
+    <eOperations name="getType" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NodeDomain" abstract="true" interface="true"
+      eSuperTypes="#//NodeInstantiation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NodeBinding" abstract="true" interface="true"
+      eSuperTypes="#//NodeInstantiation">
+    <eOperations name="getNode" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeDomain" abstract="true" interface="true"
+      eSuperTypes="#//AttributeInstantiation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeChange" abstract="true" interface="true"
+      eSuperTypes="#//Change">
+    <eOperations name="getType" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EAttribute"/>
+    <eOperations name="getNodeType" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+    <eOperations name="getValueType" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EDataType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeBinding" abstract="true" interface="true"
+      eSuperTypes="#//AttributeInstantiation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EdgeChange" abstract="true" interface="true"
+      eSuperTypes="#//Change">
+    <eOperations name="getType" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+    <eOperations name="geSourceType" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+    <eOperations name="getTargetType" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EdgeDomain" abstract="true" interface="true"
+      eSuperTypes="#//EdgeInstantiation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EdgeBinding" abstract="true" interface="true"
+      eSuperTypes="#//EdgeInstantiation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeInstantiation" abstract="true"
+      interface="true" eSuperTypes="#//ChangeInstantiation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ChangeInstantiation" abstract="true"
+      interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NodeInstantiation" abstract="true" interface="true"
+      eSuperTypes="#//ChangeInstantiation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EdgeInstantiation" abstract="true" interface="true"
+      eSuperTypes="#//ChangeInstantiation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeNodeDomainDefinition" abstract="true"
+      interface="true" eSuperTypes="#//AttributeDomain">
+    <eOperations name="nodeDomainContains" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="node" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeValueDomainDefinition" abstract="true"
+      interface="true" eSuperTypes="#//AttributeDomain">
+    <eOperations name="valueDomainContains" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeNodeDomain" abstract="true"
+      interface="true" eSuperTypes="#//AttributeNodeDomainDefinition">
+    <eOperations name="getNodeDomain" ordered="false" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeValueDomain" abstract="true"
+      interface="true" eSuperTypes="#//AttributeValueDomainDefinition">
+    <eOperations name="getValueDomain" ordered="false" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeNodeBinding" abstract="true"
+      interface="true" eSuperTypes="#//AttributeBinding">
+    <eOperations name="getNode" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeValueBinding" abstract="true"
+      interface="true" eSuperTypes="#//AttributeBinding">
+    <eOperations name="getValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EdgeSourceDomainDefinition" abstract="true"
+      interface="true" eSuperTypes="#//EdgeDomain">
+    <eOperations name="sourceDomainContains" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean">
+      <eParameters name="sourceNode" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EdgeTargetDomainDefinition" abstract="true"
+      interface="true" eSuperTypes="#//EdgeDomain">
+    <eOperations name="targetDomainContains" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="targetNode" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EdgeSourceDomain" abstract="true" interface="true"
+      eSuperTypes="#//EdgeSourceDomainDefinition">
+    <eOperations name="getSourceDomain" ordered="false" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EdgeTargetDomain" abstract="true" interface="true"
+      eSuperTypes="#//EdgeTargetDomainDefinition">
+    <eOperations name="getTargetDomain" ordered="false" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EdgeSourceBinding" abstract="true" interface="true"
+      eSuperTypes="#//EdgeBinding">
+    <eOperations name="getSource" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EdgeTargetBinding" abstract="true" interface="true"
+      eSuperTypes="#//EdgeBinding">
+    <eOperations name="getTarget" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NodeChangeDomainDefinition" abstract="true"
+      interface="true" eSuperTypes="#//NodeDomain">
+    <eOperations name="nodeDomainContains" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="node" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NodeChangeDomain" abstract="true" interface="true"
+      eSuperTypes="#//NodeChangeDomainDefinition">
+    <eOperations name="getNodeDomains" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </eClassifiers>
+</ecore:EPackage>

@@ -2,8 +2,8 @@ package org.sidiff.history.analysis.validation;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.sidiff.common.emf.EMFUtil;
 import org.sidiff.historymodel.Problem;
+import org.sidiff.revision.common.emf.EMFStorage;
 
 public abstract class BasicValidation implements IValidator {
 	
@@ -18,7 +18,7 @@ public abstract class BasicValidation implements IValidator {
 	}
 	
 	protected String getObjectID(EObject obj) {
-		String id = EMFUtil.getXmiId(obj);
+		String id = EMFStorage.getXmiId(obj);
 		
 		if (id == null) {
 			id = EcoreUtil.getURI(obj).fragment().toString();
